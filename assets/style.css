@@ -129,8 +129,12 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   filter: drop-shadow(5px 7px 0 color-mix(in srgb, var(--hero-2) 75%, #000)) drop-shadow(10px 18px 14px rgba(40, 10, 0, .28));
 }
 .hero-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-top: 64px; padding-top: 36px; border-top: 1px solid color-mix(in srgb, var(--hero-ink) 30%, transparent); }
+.hero-claim { display: grid; gap: 18px; justify-items: start; }
+.brunch-pill { margin: 0; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 7px; border-radius: 999px;
+  background: var(--hero-accent); color: var(--hero-2); font: 700 13px var(--f-display); letter-spacing: .16em; text-transform: uppercase; }
+.dot-sun { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 25%, transparent); }
 .tagline { margin: 0; font: 700 clamp(34px, 4.4vw, 54px)/1.02 var(--f-display); text-transform: uppercase; }
-.tagline em { font: 400 1.12em/1 var(--f-script); text-transform: none; color: var(--hero-accent); letter-spacing: 0; }
+.tagline em { font: 400 1.5em/.9 var(--f-script); text-transform: none; color: var(--hero-accent); letter-spacing: 0; }
 .lead { margin: 0 0 24px; max-width: 32em; font-size: 17.5px; }
 @media (prefers-reduced-motion: reduce) { .dapple { animation: none; } html { scroll-behavior: auto; } }
 
@@ -153,6 +157,9 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 /* ---------- Carte ---------- */
 .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
 .menu-cat + .menu-cat { margin-top: 56px; }
+.menu-grid { row-gap: 56px; }
+.menu-grid > .menu-cat + .menu-cat { margin-top: 0; }
+.cat-note { margin: 14px 0 0; font-size: 13px; color: var(--muted); font-style: italic; }
 .cat-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--rust); }
 .cat-head h3 { font: 700 26px var(--f-display); text-transform: uppercase; letter-spacing: .02em; color: var(--rust); }
 .cat-head .label { font-size: 11px; color: var(--muted); }
@@ -170,29 +177,53 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .extra .items { text-align: left; }
 .extra-txt { color: var(--muted); font-size: 15.5px; margin: 14px 0 0; }
 
-/* ---------- Le Saraly ---------- */
+/* ---------- Le Saraly : 4 points illustrés ---------- */
 .why { background: var(--rose); padding: 112px 0; }
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-.why-text { min-width: 0; }
 .why .label { color: var(--rust); }
-.why .h2 { margin: 14px 0 40px; font-size: clamp(36px, 4.2vw, 52px); }
-.points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 36px; }
-.points li { min-width: 0; padding-top: 34px; position: relative; }
-.points li::before { /* petit soleil du logo */
-  content: ""; position: absolute; top: 0; left: 0; width: 34px; height: 20px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-20 -20 40 24'%3E%3Cg stroke='%23B4613E' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M-9 -1.5L-16 -5.5M-6.5 -5L-11.5 -12M-2 -7L-3.5 -15.5M2 -7L3.5 -15.5M6.5 -5L11.5 -12M9 -1.5L16 -5.5'/%3E%3C/g%3E%3C/svg%3E") no-repeat left top / contain;
-}
-.points h3 { font: 700 18px/1.2 var(--f-display); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
-.points p { margin: 0; color: var(--muted); font-size: 15.5px; }
-.gallery { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 16px; }
-.arch {
-  position: relative; margin: 0; border-radius: 999px 999px var(--radius) var(--radius); overflow: hidden;
-  aspect-ratio: 3 / 4; display: flex; align-items: flex-end; max-width: 100%;
-  background: linear-gradient(170deg, var(--hero-1), var(--hero-2));
-}
-.arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.arch figcaption { position: relative; z-index: 1; padding: 30px 18px 14px; font-size: 10.5px; color: #fff; background: linear-gradient(transparent, rgba(30,10,0,.55)); width: 100%; }
-.a1 { grid-row: span 2; aspect-ratio: auto; min-height: 100%; }
+.why .section-head .h2 { margin-top: 14px; font-size: clamp(36px, 4.2vw, 52px); }
+.points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.point { min-width: 0; }
+.point h3 { font: 700 18px/1.2 var(--f-display); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; }
+.point p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.arch-il { border-radius: 999px 999px 10px 10px; overflow: hidden; aspect-ratio: 3 / 4; max-width: 100%; box-shadow: 0 18px 40px -22px rgba(62, 42, 33, .45); }
+.arch-il svg { display: block; width: 100%; height: 100%; }
+.text-link { white-space: nowrap; color: var(--rust); font: 700 14px var(--f-display); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 3px; }
+.text-link:hover { color: var(--ink); }
+.more { margin: 56px 0 0; }
+
+/* Couleurs fixes des illustrations (identité du Saraly, indépendantes de la palette) */
+.f-terra { fill: #D0603D; } .f-rust { fill: #B4613E; } .f-sun { fill: #F7D27A; } .f-cream { fill: #FCF4EC; }
+.f-white { fill: #FFFCF7; } .f-ink { fill: #3E2A21; } .f-light { fill: #FFE2C4; } .f-leaf { fill: #6F8A4E; }
+.f-shadow { fill: rgba(62, 30, 15, .22); } .f-shadow2 { fill: rgba(180, 97, 62, .16); }
+.f-sauce { fill: #C2412A; } .f-sauce2 { fill: #D9583A; }
+.f-toast { fill: #EDBE73; } .f-crust { fill: #B97A3A; } .f-pancake { fill: #F2C978; }
+.f-coffee { fill: #7A4325; } .f-crema { fill: #B9773F; } .f-bean { fill: #6B3A20; }
+.f-baghrir { fill: #F3DDA8; } .f-hole { fill: #D7AE6C; } .f-honey { fill: #E39A2D; } .f-amlou { fill: #8B5530; } .f-wood { fill: #C79461; }
+.f-choc { fill: #4A2617; } .f-banana { fill: #FBEFC4; } .f-banana2 { fill: #F3DE9A; }
+.s-rust { stroke: #B4613E; } .s-cream { stroke: #FCF4EC; } .s-line { stroke: rgba(180, 97, 62, .35); }
+.s-coffee { stroke: #3A1E10; } .s-crema { stroke: #E9C595; } .s-honey { stroke: #E39A2D; } .s-amlou2 { stroke: #A8703F; }
+
+/* ---------- Pages intérieures ---------- */
+.hero-page .hero-inner { padding-top: 40px; padding-bottom: 72px; }
+.kicker-left { opacity: .9; }
+.page-title { margin: 18px 0 20px; font: 700 clamp(56px, 9vw, 112px)/.95 var(--f-display); text-transform: uppercase; letter-spacing: -.01em; }
+.page-title em { font: 400 .78em/1 var(--f-script); text-transform: none; color: var(--hero-accent); letter-spacing: 0; }
+.hero-page .lead { margin: 0; }
+.nav-links a[aria-current="page"] { text-decoration: underline; text-underline-offset: 7px; text-decoration-thickness: 2px; }
+.stories { display: grid; gap: 96px; }
+.story { display: grid; grid-template-columns: minmax(0, 380px) 1fr; gap: 72px; align-items: center; scroll-margin-top: 24px; }
+.story:nth-child(even) { grid-template-columns: 1fr minmax(0, 380px); }
+.story:nth-child(even) .arch-il { order: 2; }
+.story-text { min-width: 0; }
+.story-text .label { color: var(--rust); }
+.story-text .h2 { margin: 14px 0 20px; font-size: clamp(34px, 4vw, 50px); }
+.story-text p:not(.label) { color: var(--muted); max-width: 34em; margin: 0 0 26px; font-size: 17.5px; }
+.follow { text-align: center; display: grid; justify-items: center; gap: 16px; }
+.follow .aside { max-width: 32em; }
+.follow .socials { margin-top: 12px; justify-content: center; }
+.h2-sm { font-size: 26px !important; margin: 40px 0 12px; }
+.venir-grid .h2:first-child { margin-bottom: 8px; }
+.map-tall { min-height: 520px; }
 
 /* ---------- Actus ---------- */
 .actus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -253,7 +284,9 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   .hero-foot { grid-template-columns: 1fr; gap: 24px; margin-top: 44px; }
   .band-grid { grid-template-columns: 1fr 1fr; gap: 28px 0; }
   .band-grid > :nth-child(3) { border-left: 0; padding-left: 0; }
-  .menu-grid, .why-grid, .venir-grid { grid-template-columns: 1fr; gap: 56px; }
+  .menu-grid, .venir-grid { grid-template-columns: 1fr; gap: 56px; }
+  .points { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .story, .story:nth-child(even) { grid-template-columns: 1fr 1fr; gap: 40px; }
   .extras { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
   .actus { grid-template-columns: 1fr 1fr; }
 }
@@ -276,9 +309,17 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   .band-grid > :last-child { border-bottom: 0; padding-bottom: 0; }
   .section, .why, .venir { padding-top: 80px; padding-bottom: 80px; }
   .section-head { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 40px; }
-  .points { grid-template-columns: 1fr; gap: 26px; }
+  .points { grid-template-columns: 1fr; gap: 28px; }
+  .point { display: grid; grid-template-columns: 112px 1fr; column-gap: 18px; align-items: center; }
+  .point .arch-il { grid-row: span 2; }
+  .point h3 { margin: 0 0 6px; align-self: end; }
+  .point p { align-self: start; }
+  .stories { gap: 64px; }
+  .story, .story:nth-child(even) { grid-template-columns: 1fr; gap: 28px; }
+  .story .arch-il, .story:nth-child(even) .arch-il { order: 0; max-width: 300px; }
+  .brunch-pill { font-size: 11.5px; letter-spacing: .12em; }
+  .map-tall { min-height: 380px; }
   .actus { grid-template-columns: 1fr; }
-  .gallery { gap: 10px; }
   .demo-theme { left: 50%; transform: translateX(-50%); bottom: 12px; }
   .footer-grid { flex-direction: column; align-items: flex-start; }
 }
