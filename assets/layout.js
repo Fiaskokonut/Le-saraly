@@ -31,7 +31,8 @@
     '<div class="footer-info"><p>157 cours de la République, 84700 Sorgues</p><p>Mer–Sam 9h–17h · Dim 9h–15h</p>' +
     '<p>' + LIENS.map(function (l) { return '<a href="' + l[1] + '">' + l[2] + "</a>"; }).join(" · ") + "</p>" +
     '<p><a href="liens.html">Tous nos liens</a> · <a href="mentions-legales.html">Mentions légales</a></p></div>' +
-    '<p class="label small">© <span id="year">2026</span> Le Saraly</p>' +
+    '<div class="footer-end"><p class="label small">© <span id="year">2026</span> Le Saraly</p>' +
+    '<p class="credit">Créé et géré par <strong>DowN</strong></p></div>' +
     "</div></footer>";
 
   // Sélecteur de palette : pour la présentation au client uniquement, à retirer ensuite
@@ -53,4 +54,5 @@
     "</nav>";
   document.body.insertAdjacentHTML("beforeend", ACTIONS);
   document.body.insertAdjacentHTML("beforeend", DEMO);
+  document.body.classList.add("with-demo");
 })();

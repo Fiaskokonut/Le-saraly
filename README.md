@@ -84,7 +84,7 @@ npm install
 npm run verify
 ```
 
-Le script ouvre chaque page dans Chromium (Playwright requis) et lance 141 vérifications : erreurs, liens, contenu comparé à `tests/faits-verifies.json`, badge ouvert/fermé, accessibilité WCAG A/AA, barre mobile. Détails dans `.claude/skills/verify/SKILL.md`.
+Le script ouvre chaque page dans Chromium (Playwright requis) et lance 197 vérifications : erreurs, liens, contenu comparé à `tests/faits-verifies.json`, badge ouvert/fermé, accessibilité WCAG A/AA, barre mobile, confort sur téléphone (320 et 390 px : débordement, cibles tactiles ≥ 44 px, textes ≥ 12 px). Détails dans `.claude/skills/verify/SKILL.md`.
 
 ## Aperçu en local
 

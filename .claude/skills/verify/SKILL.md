@@ -19,6 +19,7 @@ Le script sert le dossier en local et ouvre chaque page dans Chromium (Playwrigh
 4. le contenu affiché correspond à `tests/faits-verifies.json` : prix, horaires, adresse, e-mail, mots interdits (formulations non vérifiées) ;
 5. le badge « Ouvert / Fermé » est juste sur une semaine complète (336 instants) ;
 6. accessibilité WCAG 2 A/AA (axe-core, après `npm install`), barre d'actions mobile, blocs vides masqués, robots.txt et sitemap.xml.
+7. confort sur téléphone, en 320 et 390 px : pas de débordement, cibles tactiles ≥ 44 px, textes ≥ 12 px, fin du pied de page visible.
 
 ## Règles
 

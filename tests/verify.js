@@ -8,6 +8,7 @@
    4. le contenu affiché correspond au référentiel tests/faits-verifies.json (prix, horaires, mots interdits)
    5. propriété : le badge « Ouvert / Fermé » est juste à toute heure de la semaine (336 instants testés)
    6. accessibilité WCAG 2 A/AA (axe-core, si installé : npm install), barre mobile, blocs vides masqués, SEO
+   7. confort sur téléphone (320 px et 390 px) : pas de débordement, cibles tactiles ≥ 44 px, textes ≥ 12 px, pied de page visible
 */
 const http = require("http");
 const fs = require("fs");
@@ -217,6 +218,43 @@ async function openPage(browser, base, name, viewport) {
     check(await v.page.locator("[data-telephone]").isVisible() === !!(await v.page.evaluate(() => ((window.SARALY || {}).contact || {}).telephone)), "venir : téléphone affiché seulement s'il est renseigné");
     await v.page.close();
     for (const f of ["robots.txt", "sitemap.xml"]) check((await fetch(`${base}/${f}`)).status === 200, `${f} présent`);
+  }
+
+  // 7. Confort sur téléphone
+  console.log("7. Téléphone : 320 px et 390 px (débordement, cibles tactiles, tailles de texte, pied de page)");
+  for (const vp of [{ width: 320, height: 568 }, { width: 390, height: 844 }]) {
+    for (const name of PAGES) {
+      const { page } = await openPage(browser, base, name, vp);
+      const r = await page.evaluate(() => {
+        const W = document.documentElement.clientWidth;
+        const vis = (el) => { const s = getComputedStyle(el), b = el.getBoundingClientRect(); return s.display !== "none" && s.visibility !== "hidden" && b.width > 1 && b.height > 1; };
+        const small = [], tiny = [];
+        for (const el of document.querySelectorAll("a, button")) {
+          if (!vis(el) || el.closest(".demo-theme") || el.classList.contains("skip")) continue; // la palette de démo sera retirée
+          const b = el.getBoundingClientRect();
+          const inline = getComputedStyle(el).display === "inline" && el.closest("p, td, li") && !el.closest("nav");
+          if (!inline && (b.height < 44 || b.width < 44)) small.push(`${el.textContent.trim().slice(0, 25)} ${Math.round(b.width)}x${Math.round(b.height)}`);
+        }
+        for (const el of document.querySelectorAll("p, span, a, li, td, th, h3, button, strong")) {
+          if (!vis(el) || el.closest("svg")) continue;
+          const own = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+          if (own && parseFloat(getComputedStyle(el).fontSize) < 12) tiny.push(`${el.textContent.trim().slice(0, 25)} ${getComputedStyle(el).fontSize}`);
+        }
+        document.documentElement.style.scrollBehavior = "auto";
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
+        const bar = document.querySelector(".action-bar"), demo = document.querySelector(".demo-theme");
+        const last = [...document.querySelectorAll("footer p, footer a, footer span")].filter(vis).pop();
+        let hidden = false;
+        if (last) for (const f of [bar, demo]) if (f && vis(f) && last.getBoundingClientRect().bottom > f.getBoundingClientRect().top + 1) hidden = true;
+        return { sw: document.documentElement.scrollWidth, W, small, tiny, hidden };
+      });
+      const tag = `${name} @${vp.width}`;
+      check(r.sw <= r.W, `${tag} : pas de débordement horizontal`, `${r.sw}px`);
+      check(r.small.length === 0, `${tag} : cibles tactiles ≥ 44 px`, r.small.slice(0, 4).join(" ; "));
+      check(r.tiny.length === 0, `${tag} : textes ≥ 12 px`, r.tiny.slice(0, 4).join(" ; "));
+      check(!r.hidden, `${tag} : fin du pied de page visible au-dessus des éléments fixes`);
+      await page.close();
+    }
   }
 
   await browser.close();
