@@ -32,9 +32,9 @@ assets/visuels/        visuels du lieu et des actus (photos ou visuels IA)
 
 ## Visuels IA : garder un rendu propre
 
-1. Utiliser **un seul style de prompt** pour tous les visuels : même lumière, même cadrage, même palette, par exemple « briques chaudes, lumière dorée, vue de dessus ». Le site paraît ainsi cohérent.
+1. Utiliser **un seul style de prompt** pour tous les visuels : même lumière, même cadrage, même palette, par exemple « fond terracotta ou crème, lumière dorée du matin, ombres de feuillage ». Le site paraît ainsi cohérent.
 2. Exporter les images en **1600 px** de large, au format JPG ou WebP, à **moins de 300 Ko**.
-3. Respecter les formats : carré pour les actus (c'est aussi le format Instagram) et 3:4 pour les arches de la section « Le lieu ».
+3. Respecter les formats : carré pour les actus (c'est aussi le format Instagram) et 3:4 pour les arches de la section « Le Saraly ».
 4. Pas de texte généré par l'IA dans l'image (il ressort souvent déformé). Le texte est ajouté par le site.
 
 ## Passerelle site ↔ réseaux sociaux
