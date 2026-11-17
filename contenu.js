@@ -20,6 +20,11 @@ window.SARALY = {
     dimanche: ["09:00", "15:00"]
   },
 
+  // Fermetures exceptionnelles (jours fériés, congés…). Le badge « Ouvert » en tient
+  // compte et la page Venir les annonce. Format : { du: "AAAA-MM-JJ", au: "AAAA-MM-JJ", motif: "…" }
+  // "au" et "motif" sont facultatifs. Exemple : { du: "2026-12-24", au: "2026-12-26", motif: "Noël" }
+  fermetures: [],
+
   // Contact. Le téléphone n'est pas encore connu : laisser "" tant qu'il n'est pas
   // confirmé. Une fois rempli, il s'affiche sur la page Venir et dans la barre mobile.
   contact: {

@@ -17,10 +17,9 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#CF5E3C">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Josefin+Sans:wght@300;400;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#B5492B">
+  <link rel="preload" href="assets/fonts/josefin-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="saraly">
@@ -44,7 +43,7 @@
         <div class="story-text">
           <p class="label">Brunch</p>
           <h2 class="h2">Le brunch, salé ou sucré</h2>
-          <p>Côté salé : la chakchouka du Saraly, les bénédictes du Sud, l’avocado toast ou le velouté du Saraly. Côté sucré : le jardin d’Éden. Ouvert du mercredi au samedi de 9h à 17h, le dimanche de 9h à 15h.</p>
+          <p>Côté salé : la chakchouka du Saraly, les bénédictes du Sud, l’avocado toast ou le velouté du Saraly. Côté sucré : le jardin d’Éden. Ouvert <span data-resume-horaires></span>.</p>
           <a class="text-link" href="carte.html">Voir la carte →</a>
         </div>
       </article>
@@ -92,7 +91,7 @@
   <div data-footer></div>
 
   <script src="contenu.js"></script>
-  <script src="assets/layout.js"></script>
+  <script src="assets/render.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

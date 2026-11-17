@@ -4,6 +4,15 @@
    rose poudré, jaune soleil. Typo géométrique (comme le logo) + script.
    Pour ajuster : modifier uniquement les variables ci-dessous.
    ========================================================= */
+/* Polices hébergées sur le site (licence SIL OFL, voir assets/fonts/) : aucune requête vers Google */
+@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Josefin Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/josefin-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Josefin Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/josefin-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Josefin Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/josefin-sans-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Kaushan Script"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/kaushan-script-latin-400-normal.woff2") format("woff2"); }
+
 :root {
   /* Palette "Façade" (par défaut) */
   --hero-1: #B5492B;        /* enduit terracotta de la façade (assombri pour un contraste AA du texte crème) */
@@ -276,7 +285,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 /* ---------- Sélecteur de palette (démo) ---------- */
 .demo-theme { position: fixed; left: 16px; bottom: 16px; z-index: 50; display: flex; align-items: center; gap: 8px; background: #FFFFFFF0; padding: 8px 12px; border-radius: 999px; box-shadow: 0 6px 24px rgba(0,0,0,.18); color: #3E2A21; }
 .demo-theme .label { font-size: 9.5px; }
-.demo-theme button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; box-shadow: 0 0 0 1px rgba(0,0,0,.2); padding: 0; }
+.demo-theme [data-theme] { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; box-shadow: 0 0 0 1px rgba(0,0,0,.2); padding: 0; }
 .demo-theme button[aria-pressed="true"] { box-shadow: 0 0 0 2px #3E2A21; }
 .demo-theme [data-theme="facade"] { background: linear-gradient(135deg, #D0603D 50%, #F7D27A 50%); }
 .demo-theme [data-theme="rose"] { background: linear-gradient(135deg, #F1DAD6 50%, #B4613E 50%); }
@@ -359,7 +368,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   .nav-toggle { min-height: 44px; min-width: 64px; }
   .cat-head { flex-wrap: wrap; row-gap: 4px; }
   .cat-head h3 { font-size: clamp(19px, 6vw, 26px); }
-  .demo-theme button { width: 30px; height: 30px; }
+  .demo-theme [data-theme] { width: 30px; height: 30px; }
 }
 
 .nw { white-space: nowrap; }
@@ -392,3 +401,65 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   .plat-tag { font-size: 12px; }
   .aussi { padding: 80px 0; }
 }
+
+/* ---------- Carte Google chargée au clic ---------- */
+.map[data-map] {
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 12px; padding: 32px; min-height: 380px;
+  color: var(--hero-ink); border-radius: 10px;
+  background: radial-gradient(60% 70% at 70% 30%, rgba(255,255,255,.12), transparent 70%), repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 2px, transparent 2px 22px), linear-gradient(160deg, var(--hero-1), var(--hero-2));
+}
+.venir .map[data-map] .label, .map[data-map] .label { color: var(--hero-ink); margin: 0; }
+.map-addr { margin: 0; font: 700 28px/1.1 var(--f-display); text-transform: uppercase; }
+.map-note { margin: 0; font-size: 13px; max-width: 30em; }
+.map[data-map].map-loaded { padding: 0; display: block; }
+.map[data-map].map-loaded iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+.venir-grid .map[data-map] { min-height: 420px; }
+
+/* ---------- Accueil : le brunch en premier ---------- */
+.section-first { padding-top: 88px; }
+.aussi .more { margin-top: 32px; }
+
+/* ---------- Actus compactes ---------- */
+.actu-visual { aspect-ratio: 16 / 10; }
+.ph { gap: 4px; padding: 18px; }
+.ph::before { inset: 10px; border-radius: 120px 120px 4px 4px; }
+.ph-title { font-size: clamp(24px, 2.4vw, 32px); }
+.ph-script { font-size: 20px; }
+
+/* ---------- Palette de démo repliable ---------- */
+.demo-theme { gap: 10px; }
+.demo-toggle { background: none; border: 0; padding: 0 2px; color: inherit; cursor: pointer; font-size: 10px; width: auto; height: auto; border-radius: 0; box-shadow: none; }
+.demo-swatches { display: flex; gap: 8px; }
+
+@media (max-width: 760px) {
+  /* haut de page resserré : les plats du brunch apparaissent dès le premier écran */
+  .hero-inner { padding-top: 10px; padding-bottom: 32px; }
+  .kicker { font-size: 12px; letter-spacing: .12em; }
+  .sign { margin-top: 14px; }
+  .hero-foot { margin-top: 20px; padding-top: 18px; gap: 16px; }
+  .tagline { font-size: 30px; }
+  .hero .lead { display: none; }
+  .hero .cta .btn-ghost { display: none; }
+  .section-first { padding-top: 28px; }
+  .section-first .section-head { margin-bottom: 18px; gap: 8px; }
+  .section-first .aside { display: none; }
+  .kicker .k-addr { display: none; }
+  /* actus en format liste */
+  .actu { display: grid; grid-template-columns: 112px 1fr; align-items: stretch; }
+  .actu-visual { aspect-ratio: auto; min-height: 112px; }
+  .ph .ph-kicker, .ph .ph-script { display: none; }
+  .ph { padding: 10px 6px; }
+  .ph-title { font-size: 12px; letter-spacing: 0; overflow-wrap: anywhere; }
+  .ph::before { inset: 6px; }
+  .actu-body { padding: 14px 16px; }
+  .actu h3 { font-size: 16px; }
+  .actu p { font-size: 14px; }
+  /* palette : petite pastille qui s'ouvre au toucher */
+  .demo-theme { left: calc(12px + env(safe-area-inset-left, 0px)); transform: none; padding: 4px 12px; }
+  .demo-toggle { min-height: 44px; font-size: 12px; }
+  .demo-swatches { display: none; }
+  .demo-theme.open .demo-swatches { display: flex; }
+  .map[data-map] { min-height: 300px; padding: 24px; }
+  .map-addr { font-size: 22px; }
+}
+@media (max-width: 760px) and (min-width: 0px) { .demo-theme .label { font-size: 12px; } }

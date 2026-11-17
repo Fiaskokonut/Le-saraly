@@ -17,10 +17,9 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#CF5E3C">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Josefin+Sans:wght@300;400;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#B5492B">
+  <link rel="preload" href="assets/fonts/josefin-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/style.css">
   <script type="application/ld+json">
   {
@@ -49,18 +48,14 @@
     <div class="dapple" aria-hidden="true"></div>
     <div data-nav></div>
     <div class="hero-inner wrap">
-      <p class="label kicker"><span class="nw">Brunch <span class="sep">•</span></span> <span class="nw">Coffee shop <span class="sep">•</span></span> <span class="nw">Sorgues</span></p>
+      <p class="label kicker"><span class="nw">Coffee shop <span class="sep">•</span></span> <span class="nw k-addr">157 cours de la République <span class="sep">•</span></span> <span class="nw">Sorgues</span></p>
       <h1 class="sign"><span class="sr">Le Saraly</span><svg viewBox="-2 -8 500 92" aria-hidden="true"><use href="#logo-line"/></svg></h1>
       <div class="hero-foot">
-        <div class="hero-claim">
-          <p class="brunch-pill"><span class="dot-sun" aria-hidden="true"></span>Brunch · mer. au dim.</p>
-          <p class="tagline"><em>Brunch</em> &amp; coffee shop,<br>enfin à&nbsp;Sorgues.</p>
-        </div>
+        <p class="tagline"><em>Brunch</em> &amp; coffee shop,<br>enfin à&nbsp;Sorgues.</p>
         <div class="hero-side">
-          <p class="lead">Brunch salé ou sucré, petits-déjeuners qui voyagent du Maghreb à Londres,
-            cafés et goûters pour toute la famille. Au 157 cours de la République.</p>
+          <p class="lead">Salé ou sucré, des petits-déjeuners qui voyagent du Maghreb à Londres, des cafés et des goûters pour toute la famille.</p>
           <div class="cta">
-            <a class="btn btn-light" href="#brunch">Voir le brunch <span aria-hidden="true">→</span></a>
+            <a class="btn btn-light" href="#brunch">Voir les plats <span aria-hidden="true">↓</span></a>
             <a class="btn btn-ghost" href="venir.html">Nous trouver</a>
           </div>
         </div>
@@ -69,11 +64,7 @@
   </header>
 
   <main id="contenu">
-    <section class="band" aria-label="Le matin">
-      <div class="wrap band-grid" data-matin></div>
-    </section>
-
-    <section class="section wrap" id="brunch">
+    <section class="section wrap section-first" id="brunch">
       <div class="section-head">
         <div>
           <p class="label section-kicker">Salé &amp; sucré</p>
@@ -85,31 +76,18 @@
       <p class="more"><a class="btn btn-dark" href="carte.html">Toute la carte <span aria-hidden="true">→</span></a></p>
     </section>
 
+    <section class="band" aria-label="Le matin">
+      <div class="wrap band-grid" data-matin></div>
+    </section>
+
     <section class="aussi" aria-labelledby="aussi-t">
       <div class="wrap">
         <div class="section-head">
-          <h2 class="h2" id="aussi-t">Et aussi</h2>
-          <p class="aside">Le goûter, le menu des enfants et les douceurs du comptoir.</p>
+          <h2 class="h2" id="aussi-t">Le goûter &amp; les enfants</h2>
+          <p class="aside">L’après-midi, une douceur du comptoir avec une boisson. Et un menu pour les moins de 12 ans.</p>
         </div>
         <div class="extras extras-home" data-formules></div>
-      </div>
-    </section>
-
-    <section class="why" id="saraly">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="label">Le Saraly</p>
-            <h2 class="h2">Ce qui vous attend au Saraly</h2>
-          </div>
-          <p class="aside"><a class="text-link" href="le-saraly.html">Découvrir le Saraly →</a></p>
-        </div>
-        <ul class="points">
-          <li class="point"><div class="arch-il"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration : poêle de chakchouka"><use href="#il-brunch"/></svg></div><h3>Le brunch</h3><p>Salé ou sucré : chakchouka du Saraly, bénédictes du Sud, avocado toast, jardin d’Éden.</p></li>
-          <li class="point"><div class="arch-il"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration : latte avec un cœur et grains de café"><use href="#il-coffee"/></svg></div><h3>Le coffee shop de Sorgues</h3><p>Espresso, cappuccino, latte macchiato, mocha, et une douceur du comptoir.</p></li>
-          <li class="point"><div class="arch-il"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration : baghrir au miel et bol d’amlou"><use href="#il-voyage"/></svg></div><h3>Un petit-déj qui voyage</h3><p>De 9h à 10h30 : msemen, baghrir ou harcha avec amlou, le Frenchy ou l’English.</p></li>
-          <li class="point"><div class="arch-il"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration : pile de pancakes au chocolat et cookie"><use href="#il-famille"/></svg></div><h3>Pour toute la famille</h3><p>Le P’tit Saraly jusqu’à 12 ans, et un menu goûter dès 4,90 €.</p></li>
-        </ul>
+        <p class="more"><a class="text-link" href="le-saraly.html">Découvrir le Saraly →</a></p>
       </div>
     </section>
 
@@ -138,9 +116,11 @@
             <a class="btn btn-outline" href="venir.html">Infos pratiques</a>
           </div>
         </div>
-        <div class="map">
-          <iframe title="Plan d’accès Le Saraly" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=157+cours+de+la+R%C3%A9publique,+84700+Sorgues&amp;output=embed"></iframe>
+        <div class="map" data-map>
+          <p class="label">Plan d’accès</p>
+          <p class="map-addr">157 cours de la République<br>84700 Sorgues</p>
+          <button class="btn btn-light" type="button" data-map-load>Afficher la carte</button>
+          <p class="map-note">La carte est fournie par Google Maps, qui dépose des cookies une fois affichée.</p>
         </div>
       </div>
     </section>
@@ -149,7 +129,7 @@
   <div data-footer></div>
 
   <script src="contenu.js"></script>
-  <script src="assets/layout.js"></script>
+  <script src="assets/render.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

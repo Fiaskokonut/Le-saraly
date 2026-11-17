@@ -1,7 +1,8 @@
 /*
   Vérification de bout en bout du site Le Saraly.
-  Lance : node tests/verify.js   (Playwright + Chromium requis)
-  Sert le dossier en local, ouvre chaque page comme un visiteur et vérifie :
+  Lance : npm run verify   (Node.js, Playwright + Chromium requis ; npm install pour axe-core)
+  Génère le site comme l'hébergeur (node build.js), le sert en local, ouvre chaque page
+  comme un visiteur et vérifie :
    1. chaque page, ordinateur + mobile : aucune erreur JS, aucun fichier local manquant, pas de défilement horizontal
    2. le parcours : menu → chaque page, menu mobile, retour accueil, sélecteur de palette
    3. tous les liens internes répondent
@@ -9,15 +10,20 @@
    5. propriété : le badge « Ouvert / Fermé » est juste à toute heure de la semaine (336 instants testés)
    6. accessibilité WCAG 2 A/AA (axe-core, si installé : npm install), barre mobile, blocs vides masqués, SEO
    7. confort sur téléphone (320 px et 390 px) : pas de débordement, cibles tactiles ≥ 44 px, textes ≥ 12 px, pied de page visible
+   8. site lisible sans JavaScript, aucune requête vers un tiers au chargement, carte Google au clic,
+      fermetures exceptionnelles, données Google cohérentes, pages et fichiers annexes, mode « fichiers bruts »
 */
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
 
-const ROOT = path.resolve(__dirname, "..");
+const SRC = path.resolve(__dirname, "..");
+const os = require("os");
+const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "saraly-dist-"));
+require("child_process").execFileSync(process.execPath, [path.join(SRC, "build.js"), ROOT], { stdio: "inherit" });
 const FAITS = JSON.parse(fs.readFileSync(path.join(__dirname, "faits-verifies.json"), "utf8"));
-const PAGES = ["index", "carte", "le-saraly", "actus", "venir", "liens", "mentions-legales"];
+const PAGES = ["index", "carte", "le-saraly", "actus", "venir", "liens", "mentions-legales", "404"];
 const NAV = { "carte.html": "carte", "le-saraly.html": "le-saraly", "actus.html": "actus", "venir.html": "venir" };
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".json": "application/json" };
 
@@ -26,12 +32,12 @@ function check(ok, label, detail) {
   if (ok) { passes++; } else { fails++; console.log("  ✗ " + label + (detail ? " — " + detail : "")); }
 }
 
-function serve() {
+function serve(dir = ROOT) {
   return new Promise((resolve) => {
     const srv = http.createServer((req, res) => {
       const u = decodeURIComponent(req.url.split("?")[0]);
-      const f = path.join(ROOT, u === "/" ? "index.html" : u);
-      if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end("404"); }
+      const f = path.join(dir, u === "/" ? "index.html" : u);
+      if (!f.startsWith(dir) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end("404"); }
       res.writeHead(200, { "Content-Type": TYPES[path.extname(f)] || "application/octet-stream" });
       fs.createReadStream(f).pipe(res);
     }).listen(0, "127.0.0.1", () => resolve(srv));
@@ -193,7 +199,7 @@ async function openPage(browser, base, name, viewport) {
   console.log("6. Accessibilité (WCAG 2 A/AA), barre mobile, blocs vides, SEO");
   {
     let AXE = null;
-    try { AXE = fs.readFileSync(require.resolve("axe-core/axe.min.js", { paths: [ROOT] }), "utf8"); }
+    try { AXE = fs.readFileSync(require.resolve("axe-core/axe.min.js", { paths: [SRC] }), "utf8"); }
     catch (e) { console.log("  (axe-core absent : lancer « npm install » pour le test d'accessibilité)"); }
     if (AXE) {
       for (const name of PAGES) {
@@ -262,8 +268,99 @@ async function openPage(browser, base, name, viewport) {
     }
   }
 
+  // 8. Robustesse, vie privée, cohérence
+  console.log("8. Sans JavaScript, aucun tiers au chargement, carte au clic, fermetures, données Google, annexes");
+  {
+    // a. sans JavaScript, le contenu est déjà dans les pages
+    const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
+    for (const [name, minPrix] of [["carte", 10], ["index", 5]]) {
+      const pg = await nojs.newPage();
+      await pg.goto(`${base}/${name}.html`);
+      const r = await pg.evaluate(() => ({ prix: (document.body.innerText.match(/\d+,\d{2} €/g) || []).length, nav: document.querySelectorAll("nav .nav-links a").length, footer: !!document.querySelector("footer.footer"), logo: !!document.getElementById("logo-line") }));
+      check(r.prix >= minPrix, `sans JavaScript, ${name} : ${r.prix} prix visibles`);
+      check(r.nav === 4 && r.footer && r.logo, `sans JavaScript, ${name} : menu, pied de page et logo présents`);
+      await pg.close();
+    }
+    const pgv = await nojs.newPage(); await pgv.goto(`${base}/venir.html`);
+    check(await pgv.locator("tbody[data-hours] tr").count() === 7, "sans JavaScript, venir : tableau des horaires présent");
+    await nojs.close();
+
+    // b. aucune requête vers un autre site au chargement (polices locales, carte Google non chargée)
+    for (const name of ["index", "venir", "carte"]) {
+      const pg = await browser.newPage(); const ext = [];
+      pg.on("request", (r) => { if (!r.url().startsWith(base) && !r.url().startsWith("data:")) ext.push(new URL(r.url()).host); });
+      await pg.route(/^https?:\/\/(?!127\.0\.0\.1)/, (route) => route.abort());
+      await pg.goto(`${base}/${name}.html`, { waitUntil: "load" });
+      await pg.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await pg.waitForTimeout(300);
+      check(ext.length === 0, `${name} : aucune requête vers un tiers au chargement`, [...new Set(ext)].join(", "));
+      const fonts = await pg.evaluate(async () => { await document.fonts.ready; return ["Josefin Sans", "Instrument Sans", "Kaushan Script"].map((f) => document.fonts.check(`16px "${f}"`)); });
+      check(fonts.every(Boolean), `${name} : les 3 polices locales sont chargées`);
+      await pg.close();
+    }
+
+    // c. la carte Google ne se charge qu'au clic
+    {
+      const pg = await browser.newPage(); const g = [];
+      pg.on("request", (r) => { if (/google\./.test(r.url())) g.push(r.url()); });
+      await pg.route(/^https?:\/\/(?!127\.0\.0\.1)/, (route) => route.abort());
+      await pg.goto(`${base}/venir.html`);
+      check(await pg.locator("[data-map] iframe").count() === 0 && g.length === 0, "venir : pas de carte Google avant le clic");
+      await pg.locator("[data-map-load]").click(); await pg.waitForTimeout(200);
+      check(await pg.locator("[data-map] iframe").count() === 1, "venir : carte Google affichée après le clic");
+      await pg.close();
+    }
+
+    // d. fermeture exceptionnelle : le badge et la page Venir en tiennent compte
+    {
+      const pg = await browser.newPage();
+      await pg.route(/^https?:\/\/(?!127\.0\.0\.1)/, (route) => route.abort());
+      await pg.route("**/contenu.js", async (route) => {
+        const res = await route.fetch(); const body = (await res.text()) + '\nwindow.SARALY.fermetures = [{ du: "2026-11-18", au: "2026-11-19", motif: "Test" }];';
+        await route.fulfill({ response: res, body });
+      });
+      await pg.clock.setFixedTime(new Date("2026-11-18T09:00:00Z")); // mercredi 10h à Paris, normalement ouvert
+      await pg.goto(`${base}/venir.html`);
+      const st = await pg.locator("#status .status-txt").textContent();
+      check(st.startsWith("Fermé exceptionnellement") && /vendredi 9h/.test(st), "fermeture exceptionnelle : badge « Fermé exceptionnellement · ouvre vendredi 9h »", st);
+      check(await pg.locator("[data-fermetures-bloc]").isVisible(), "fermeture exceptionnelle : annoncée sur la page Venir");
+      await pg.close();
+    }
+
+    // e. données Google et pied de page cohérents avec les horaires du référentiel
+    {
+      const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+      const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+      const EN = { Monday: "lundi", Tuesday: "mardi", Wednesday: "mercredi", Thursday: "jeudi", Friday: "vendredi", Saturday: "samedi", Sunday: "dimanche" };
+      const fromLd = {}; for (const spec of ld.openingHoursSpecification) for (const d of [].concat(spec.dayOfWeek)) fromLd[EN[d]] = [spec.opens, spec.closes];
+      const ok = Object.entries(FAITS.horaires).every(([j, h]) => JSON.stringify(h) === JSON.stringify(fromLd[j] || null));
+      check(ok, "données Google : horaires identiques au référentiel", JSON.stringify(fromLd));
+      const { page } = await openPage(browser, base, "index", { width: 1280, height: 900 });
+      const foot = await page.locator(".footer-info p").nth(1).textContent();
+      check(foot === "Mer–Sam 9h–17h · Dim 9h–15h", `pied de page : horaires « ${foot} »`);
+      await page.close();
+    }
+
+    // f. fichiers annexes
+    for (const f of ["404.html", "assets/img/apple-touch-icon.png", "assets/fonts/josefin-sans-latin-700-normal.woff2", "assets/fonts/LICENSE-josefin-sans.txt"]) {
+      check((await fetch(`${base}/${f}`)).status === 200, `${f} présent`);
+    }
+
+    // g. les fichiers bruts (sans build) restent utilisables : JavaScript affiche le contenu
+    {
+      const raw = await serve(SRC); const rbase = `http://127.0.0.1:${raw.address().port}`;
+      const pg = await browser.newPage(); const errors = [];
+      pg.on("pageerror", (e) => errors.push(e.message));
+      await pg.route(/^https?:\/\/(?!127\.0\.0\.1)/, (route) => route.abort());
+      await pg.goto(`${rbase}/index.html`); await pg.waitForTimeout(200);
+      const r = await pg.evaluate(() => ({ plats: document.querySelectorAll(".plat").length, nav: document.querySelectorAll("nav .nav-links a").length }));
+      check(errors.length === 0 && r.plats >= 4 && r.nav === 4, "fichiers bruts : le contenu s'affiche par JavaScript", errors.join(" | "));
+      await pg.close(); raw.close();
+    }
+  }
+
   await browser.close();
   srv.close();
+  fs.rmSync(ROOT, { recursive: true, force: true });
   console.log(`\n${passes} vérifications OK, ${fails} en échec`);
   process.exit(fails ? 1 : 0);
 })().catch((e) => { console.error(e); process.exit(2); });
