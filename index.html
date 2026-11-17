@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Saraly — Coffee shop à Sorgues</title>
+  <meta name="description" content="Le Saraly, coffee shop au 157 cours de la République à Sorgues. Café, douceurs et sur le pouce sous des voûtes de briques de 1859.">
+  <link rel="canonical" href="https://lesaraly.fr/">
+
+  <!-- Partage Facebook / Instagram / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Le Saraly">
+  <meta property="og:title" content="Le Saraly — Le café sous les voûtes, à Sorgues">
+  <meta property="og:description" content="Café, douceurs et sur le pouce au 157 cours de la République, dans une bâtisse de 1859.">
+  <meta property="og:url" content="https://lesaraly.fr/">
+  <meta property="og:image" content="https://lesaraly.fr/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#9A3F26">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Fiche Google : aide le référencement local ("café Sorgues") -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Le Saraly",
+    "url": "https://lesaraly.fr/",
+    "image": "https://lesaraly.fr/assets/img/og.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "157 cours de la République",
+      "postalCode": "84700",
+      "addressLocality": "Sorgues",
+      "addressCountry": "FR"
+    },
+    "servesCuisine": ["Café", "Pâtisserie", "Snacking"],
+    "sameAs": [
+      "https://www.instagram.com/le_saraly_/",
+      "https://www.facebook.com/profile.php?id=61574229893701"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#carte">Aller au contenu</a>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <nav class="nav wrap" aria-label="Navigation principale">
+      <a class="logo" href="#" aria-label="Le Saraly, accueil">Le Saraly</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul class="nav-links" id="menu">
+        <li><a href="#carte">La carte</a></li>
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#actus">Les actus</a></li>
+        <li><a href="#venir">Venir</a></li>
+      </ul>
+      <p class="status" id="status" aria-live="polite"><span class="dot"></span><span class="status-txt">Horaires</span></p>
+    </nav>
+
+    <div class="hero-inner wrap">
+      <div class="hero-text">
+        <p class="kicker mono">Coffee shop — Sorgues, 84700</p>
+        <h1 class="display">
+          <span class="l1">Un café,</span>
+          <span class="l2">sous les</span>
+          <span class="l3">voûtes.</span>
+        </h1>
+        <p class="lead">Au 157 cours de la République, dans une bâtisse de 1859 aux voûtes de briques restaurées.
+          Jérémy et Julien vous servent le café, les douceurs maison et le temps qu’il faut.</p>
+        <div class="cta">
+          <a class="btn btn-light" href="#carte">Voir la carte <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#venir">Nous trouver</a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="vault">
+          <img class="vault-img" src="assets/visuels/hero.jpg" alt="" onerror="this.remove()">
+        </div>
+        <div class="saucer">
+          <div class="cup"><div class="crema"></div></div>
+          <div class="handle"></div>
+          <div class="spoon"></div>
+        </div>
+        <p class="stamp mono">Depuis<br><b>1859</b><br>les murs</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ BANDEAU DU MOMENT ============ -->
+  <section class="band" aria-label="En ce moment">
+    <div class="wrap band-grid">
+      <p class="band-title mono">En ce moment<br>au comptoir</p>
+      <article>
+        <p class="mono band-k">À la tasse</p>
+        <h3>Latte noisette</h3>
+        <p>Espresso, lait entier, sirop de noisette torréfiée. Le préféré de l’automne.</p>
+      </article>
+      <article>
+        <p class="mono band-k">En vitrine</p>
+        <h3>Cookie maison</h3>
+        <p>Chocolat noir et fleur de sel, cuit le matin même. Quand il n’y en a plus…</p>
+      </article>
+      <article>
+        <p class="mono band-k">Sur le pouce</p>
+        <h3>Formule midi</h3>
+        <p>Un salé, une douceur et une boisson. À manger sous les voûtes ou à emporter.</p>
+      </article>
+    </div>
+  </section>
+
+  <main>
+    <!-- ============ LA CARTE ============ -->
+    <section class="section wrap" id="carte">
+      <div class="section-head">
+        <h2 class="display h2">La carte</h2>
+        <p class="aside">Même prix sur place ou à emporter. Lait végétal sur demande,
+          et tout est préparé derrière le comptoir, devant vous.</p>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-col">
+          <div class="menu-cat">
+            <div class="cat-head"><h3>Cafés</h3><span class="mono">Espresso</span></div>
+            <ul class="items">
+              <li><div class="row"><span class="name">Espresso</span><span class="leader"></span><span class="price">1,80 €</span></div><p>Court, intense, comme il se doit.</p></li>
+              <li><div class="row"><span class="name">Allongé</span><span class="leader"></span><span class="price">2,00 €</span></div><p>Un espresso, de l’eau chaude à côté : vous dosez.</p></li>
+              <li><div class="row"><span class="name">Noisette</span><span class="leader"></span><span class="price">2,20 €</span></div><p>Espresso, une cuillère de mousse de lait.</p></li>
+              <li><div class="row"><span class="name">Cappuccino</span><span class="leader"></span><span class="price">3,80 €</span></div><p>Mousse généreuse, servi tiède-chaud, pas brûlant.</p></li>
+              <li><div class="row"><span class="name">Latte <span class="tag">Saraly</span></span><span class="leader"></span><span class="price">4,20 €</span></div><p>Le grand format, avec le sirop du moment.</p></li>
+              <li><div class="row"><span class="name">Flat white</span><span class="leader"></span><span class="price">4,00 €</span></div><p>Double ristretto, lait finement texturé.</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="menu-col">
+          <div class="menu-cat">
+            <div class="cat-head"><h3>Frais &amp; sans café</h3><span class="mono">Aussi bien</span></div>
+            <ul class="items">
+              <li><div class="row"><span class="name">Iced latte</span><span class="leader"></span><span class="price">4,50 €</span></div><p>Sur glace, lait au choix.</p></li>
+              <li><div class="row"><span class="name">Chocolat chaud</span><span class="leader"></span><span class="price">3,80 €</span></div><p>Chocolat noir fondu dans du lait entier.</p></li>
+              <li><div class="row"><span class="name">Chaï latte</span><span class="leader"></span><span class="price">4,20 €</span></div><p>Épices douces, peu sucré.</p></li>
+              <li><div class="row"><span class="name">Thé ou infusion</span><span class="leader"></span><span class="price">3,00 €</span></div><p>En théière. Demandez la sélection.</p></li>
+            </ul>
+          </div>
+          <div class="menu-cat">
+            <div class="cat-head"><h3>Sur le pouce</h3><span class="mono">Midi</span></div>
+            <ul class="items">
+              <li><div class="row"><span class="name">Formule midi</span><span class="leader"></span><span class="price">12,50 €</span></div><p>Un salé + une douceur + une boisson.</p></li>
+              <li><div class="row"><span class="name">Salé du jour</span><span class="leader"></span><span class="price">8,00 €</span></div><p>Selon l’arrivage : bagel, croque, toast…</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-cat sweets">
+        <div class="cat-head"><h3>À grignoter</h3><span class="mono">Fait maison</span></div>
+        <ul class="items items-3">
+          <li><div class="row"><span class="name">Cookie</span><span class="leader"></span><span class="price">3,00 €</span></div><p>Chocolat noir, fleur de sel.</p></li>
+          <li><div class="row"><span class="name">Banana bread</span><span class="leader"></span><span class="price">3,50 €</span></div><p>La tranche, toastée si vous voulez.</p></li>
+          <li><div class="row"><span class="name">Gâteau du jour</span><span class="leader"></span><span class="price">4,50 €</span></div><p>Il change, l’ardoise le dit.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ LE LIEU ============ -->
+    <section class="lieu" id="lieu">
+      <div class="wrap lieu-grid">
+        <div class="lieu-text">
+          <p class="kicker mono">Le lieu</p>
+          <h2 class="display h2">Des briques de 1859,<br>un comptoir d’aujourd’hui.</h2>
+          <p>On a gardé ce que les murs avaient de mieux : les voûtes en briques, restaurées une à une.
+            Le reste, on l’a pensé pour que vous restiez : de la lumière, des places pour travailler,
+            d’autres pour discuter, et la musique pas trop fort.</p>
+          <dl class="facts">
+            <div><dt class="mono">Construit</dt><dd>1859</dd></div>
+            <div><dt class="mono">Au comptoir</dt><dd>Jérémy &amp; Julien</dd></div>
+            <div><dt class="mono">Adresse</dt><dd>157 cours de la République</dd></div>
+          </dl>
+        </div>
+        <div class="gallery">
+          <figure class="arch a1"><img src="assets/visuels/lieu-1.jpg" alt="Les voûtes en briques de la salle" onerror="this.remove()"><figcaption class="mono">La salle voûtée</figcaption></figure>
+          <figure class="arch a2"><img src="assets/visuels/lieu-2.jpg" alt="Le comptoir et la machine à espresso" onerror="this.remove()"><figcaption class="mono">Le comptoir</figcaption></figure>
+          <figure class="arch a3"><img src="assets/visuels/lieu-3.jpg" alt="Une tasse de latte sur une table" onerror="this.remove()"><figcaption class="mono">Latte art</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ACTUS / RÉSEAUX ============ -->
+    <section class="section wrap" id="actus">
+      <div class="section-head">
+        <h2 class="display h2">Les actus</h2>
+        <p class="aside">Nouveautés, fermetures exceptionnelles, soirées : tout ce qu’on publie
+          sur Instagram et Facebook se retrouve ici.</p>
+      </div>
+      <div class="actus" id="actus-list"><!-- rempli par contenu.js --></div>
+      <div class="socials">
+        <a class="btn btn-dark" href="https://www.instagram.com/le_saraly_/" target="_blank" rel="noopener">Instagram · @le_saraly_</a>
+        <a class="btn btn-outline" href="https://www.facebook.com/profile.php?id=61574229893701" target="_blank" rel="noopener">Facebook · Le Saraly</a>
+      </div>
+    </section>
+
+    <!-- ============ VENIR ============ -->
+    <section class="venir" id="venir">
+      <div class="wrap venir-grid">
+        <div>
+          <p class="kicker mono">Venir</p>
+          <h2 class="display h2">157 cours de la République</h2>
+          <p class="addr">84700 Sorgues — en plein centre-ville.</p>
+          <table class="hours" aria-label="Horaires d’ouverture"><tbody id="hours"></tbody></table>
+          <div class="cta">
+            <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Le+Saraly+157+cours+de+la+R%C3%A9publique+84700+Sorgues" target="_blank" rel="noopener">Itinéraire <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="map">
+          <iframe title="Plan d’accès Le Saraly" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=157+cours+de+la+R%C3%A9publique,+84700+Sorgues&amp;output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <a class="logo" href="#">Le Saraly</a>
+      <p>157 cours de la République, 84700 Sorgues</p>
+      <p><a href="liens.html">Tous nos liens</a> · <a href="mentions-legales.html">Mentions légales</a></p>
+      <p class="mono small">© <span id="year">2026</span> Le Saraly</p>
+    </div>
+  </footer>
+
+  <!-- Sélecteur de palette : uniquement pour la présentation au client, à retirer ensuite -->
+  <div class="demo-theme" role="group" aria-label="Palette (démo)">
+    <span class="mono">Palette</span>
+    <button data-theme="brique" aria-pressed="true" title="Brique"></button>
+    <button data-theme="olive" aria-pressed="false" title="Olive"></button>
+    <button data-theme="nuit" aria-pressed="false" title="Bleu nuit"></button>
+  </div>
+
+  <script src="contenu.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
