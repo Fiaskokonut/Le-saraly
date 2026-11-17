@@ -1,0 +1,32 @@
+{
+  "_note": "Référentiel de vérification. Chaque fait est relevé sur une source du Saraly. Ne pas modifier ce fichier pour faire passer un test : corriger le site, ou mettre à jour la source ici après confirmation du client.",
+  "sources": {
+    "bio-instagram": "Bio Instagram @le_saraly_ (capture du 17/11/2026) : « Brunch · Coffee shop & pas que… · Sorgues : 157 cours de la république · Mer-Sam 9/17h • Dim 9/15h »",
+    "fb-menu-matin": "Visuel Facebook « de 9h à 10h30 » : Le Saraly 15€90, Le Frenchy 9€90, L'English 12€90",
+    "fb-menu-sale-sucre": "Visuel Facebook « Côté salé / Côté sucré » (basse résolution)",
+    "fb-menu-gouter": "Visuel Facebook « Menu goûter » : Le petit goûter 4,90 €, Le goûter gourmand 6,90 €",
+    "fb-ptit-saraly": "Visuel Facebook « Le P'tit Saraly » jusqu'à 12 ans",
+    "fb-recrutement": "Visuel Facebook « Recrutement Chef(fe) de cuisine » — lesaraly@gmail.com",
+    "pagesjaunes": "Annuaire PagesJaunes : 157 cours République, 84700 Sorgues, centre-ville"
+  },
+  "horaires": {
+    "lundi": null, "mardi": null,
+    "mercredi": ["09:00", "17:00"], "jeudi": ["09:00", "17:00"], "vendredi": ["09:00", "17:00"], "samedi": ["09:00", "17:00"],
+    "dimanche": ["09:00", "15:00"]
+  },
+  "prix": {
+    "Le Saraly": "15,90 €",
+    "Le Frenchy": "9,90 €",
+    "L’English": "12,90 €",
+    "La chakchouka du Saraly": "11,90 €",
+    "Les bénédictes du Sud": "12,90 €",
+    "Avocado toast": "14,90 €",
+    "Le velouté du Saraly": "12,90 €",
+    "Le jardin d’Éden": "10,90 €",
+    "Le petit goûter": "4,90 €",
+    "Le goûter gourmand": "6,90 €"
+  },
+  "adresse": "157 cours de la République",
+  "email": "lesaraly@gmail.com",
+  "interdits": ["salon de thé", "Avignon", "grandes faims", "voûte", "1859", "banane", "fermetures exceptionnelles", "Jérémy", "Julien"]
+}
