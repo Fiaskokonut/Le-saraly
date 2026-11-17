@@ -4,8 +4,8 @@ Site vitrine du **Saraly**, brunch et coffee shop au 157 cours de la République
 Site statique en HTML, CSS et JS. Il n'y a ni CMS, ni base de données, ni étape de build : il suffit d'ouvrir `index.html`.
 
 ```
-index.html             accueil défilant (résumé de chaque page)
-brunch.html            le brunch, les formules du matin, toute la carte, goûter, P'tit Saraly
+index.html             accueil centré sur le brunch : formules du matin, plats en cartes illustrées, goûter, actus, accès
+carte.html             la carte complète : formules du matin, brunch, cafés, boissons, goûter, P'tit Saraly
 le-saraly.html         le Saraly en quatre points illustrés
 actus.html             toutes les actus
 venir.html             horaires, adresse, contact, plan
@@ -28,7 +28,7 @@ La carte, les horaires et les actus sont saisis une seule fois dans `contenu.js`
 - **Logo** : reconstitué en SVG dans `assets/layout.js` (`#g-le`, `#g-saraly`, badge `#logo-badge`). Il reprend le S en blocs, les A pointés, le E à losange, le R anguleux, le soleil et le Y à point. **Demander le fichier officiel** (SVG ou PNG HD) pour vérifier ou remplacer.
 - **Couleurs** : terracotta de la façade, rouille du logo sur crème, rose poudré, jaune soleil. La terracotta du haut de page est légèrement assombrie (#B5492B) et les petits textes rouille utilisent une rouille foncée (#96492A), pour respecter le contraste WCAG AA. Le sélecteur de démo propose 4 palettes : Façade, Rose poudré, Soleil, Crème.
 - **Typos** : Josefin Sans (géométrique, proche du logo), Kaushan Script (rappelle les menus manuscrits), Instrument Sans (texte courant).
-- **Illustrations** : 4 dessins vectoriels (chakchouka, latte, baghrir et amlou, pancakes) dans `assets/layout.js`.
+- **Illustrations** : 8 dessins vectoriels dans `assets/layout.js` (chakchouka, bénédictes, avocado toast, velouté, latte, baghrir et amlou, pancakes, et un motif soleil pour « Le jardin d'Éden », dont la composition n'est pas connue). À remplacer par leurs photos HD dès qu'ils les fournissent.
 - **Positionnement** : le brunch (visible dès le haut de page), le coffee shop de Sorgues, un petit-déj qui voyage (msemen, baghrir, Frenchy, English), le goûter et les familles.
 
 ## Sources du contenu et points à valider

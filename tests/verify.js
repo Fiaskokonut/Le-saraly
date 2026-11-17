@@ -17,8 +17,8 @@ const { chromium } = require("playwright");
 
 const ROOT = path.resolve(__dirname, "..");
 const FAITS = JSON.parse(fs.readFileSync(path.join(__dirname, "faits-verifies.json"), "utf8"));
-const PAGES = ["index", "brunch", "le-saraly", "actus", "venir", "liens", "mentions-legales"];
-const NAV = { "brunch.html": "brunch", "le-saraly.html": "le-saraly", "actus.html": "actus", "venir.html": "venir" };
+const PAGES = ["index", "carte", "le-saraly", "actus", "venir", "liens", "mentions-legales"];
+const NAV = { "carte.html": "carte", "le-saraly.html": "le-saraly", "actus.html": "actus", "venir.html": "venir" };
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".json": "application/json" };
 
 let fails = 0, passes = 0;
@@ -137,7 +137,7 @@ async function openPage(browser, base, name, viewport) {
       check(!all.toLowerCase().includes(mot.toLowerCase()), `aucune mention « ${mot} »`);
     }
     // chaque prix affiché à côté d'un nom doit correspondre au référentiel
-    const { page } = await openPage(browser, base, "brunch", { width: 1280, height: 900 });
+    const { page } = await openPage(browser, base, "carte", { width: 1280, height: 900 });
     const rows = await page.$$eval(".row, .band-head", (els) => els.map((e) => ({
       nom: (e.querySelector(".name, h3") || {}).firstChild ? (e.querySelector(".name, h3").firstChild.textContent || "").trim() : "",
       prix: (e.querySelector(".price") || {}).textContent || null
@@ -149,6 +149,11 @@ async function openPage(browser, base, name, viewport) {
       .map((c) => !!c.querySelector(".cat-note")));
     check(sansPrix.every(Boolean), "catégories sans prix marquées « Prix à confirmer »");
     await page.close();
+    const home = await openPage(browser, base, "index", { width: 1280, height: 900 });
+    const plats = await home.page.$$eval(".plat", (els) => els.map((e) => ({ nom: e.querySelector(".plat-name").textContent.trim(), prix: e.querySelector(".plat-price").textContent.trim() })));
+    check(plats.length >= 4, `accueil : ${plats.length} plats du brunch affichés`);
+    for (const p of plats) check(FAITS.prix[p.nom] === p.prix, `accueil : prix « ${p.nom} » = ${p.prix}`, `référentiel : ${FAITS.prix[p.nom] || "absent"}`);
+    await home.page.close();
     check(all.includes(FAITS.adresse), "adresse affichée");
     check(all.includes(FAITS.email), "e-mail affiché");
     const v = await openPage(browser, base, "venir", { width: 1280, height: 900 });
@@ -205,7 +210,7 @@ async function openPage(browser, base, name, viewport) {
     const m = await openPage(browser, base, "index", { width: 390, height: 844 });
     check(await m.page.locator(".action-bar").isVisible(), "mobile : barre d'actions visible");
     const hrefs = await m.page.$$eval(".action-bar a", (as) => as.map((a) => a.getAttribute("href")));
-    check(hrefs.includes("brunch.html"), "mobile : barre d'actions → Le brunch");
+    check(hrefs.includes("carte.html"), "mobile : barre d'actions → La carte");
     const tel = await m.page.evaluate(() => ((window.SARALY || {}).contact || {}).telephone || "");
     check(tel ? hrefs.some((h) => h.startsWith("tel:")) : !hrefs.some((h) => h.startsWith("tel:")), "mobile : bouton Appeler seulement si un téléphone est renseigné");
     await m.page.close();

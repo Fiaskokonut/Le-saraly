@@ -65,14 +65,29 @@
       (it.desc ? "<p>" + esc(it.desc) + "</p>" : "") + "</li>";
   }
   each("[data-carte]", function (el) {
-    var seulAccueil = el.getAttribute("data-carte") === "accueil";
-    var cats = (data.carte || []).filter(function (c) { return !seulAccueil || c.accueil; });
+    var cats = (data.carte || []).slice();
+    if (el.hasAttribute("data-avec-matin") && data.matin) {
+      cats.unshift({ titre: "Le matin", label: data.matin.horaire, items: data.matin.formules });
+    }
     el.innerHTML = cats.map(function (c) {
       return '<div class="menu-cat"><div class="cat-head"><h3>' + esc(c.titre) + '</h3><span class="label">' + esc(c.label) +
         '</span></div><ul class="items">' + c.items.map(item).join("") + "</ul>" +
         (c.items.some(function (it) { return !it.prix; }) ? '<p class="cat-note">Prix à confirmer</p>' : "") + "</div>";
     }).join("");
   });
+  // Plats du brunch en grandes cartes illustrées (accueil)
+  each("[data-plats]", function (el) {
+    var cat = (data.carte || []).filter(function (c) { return c.vedette; })[0];
+    if (!cat) return;
+    el.innerHTML = cat.items.map(function (it) {
+      var deco = it.illus === "sucre"; // motif décoratif, ne représente pas le plat
+      var ill = it.illus ? '<div class="arch-il plat-il"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"' +
+        (deco ? ' aria-hidden="true"' : ' role="img" aria-label="' + esc(it.nom) + '"') + '><use href="#il-' + esc(it.illus) + '"/></svg></div>' : "";
+      return '<article class="plat">' + ill + '<div class="plat-body"><p class="label plat-tag">' + esc(it.tag || "") +
+        '</p><h3 class="plat-name">' + esc(it.nom) + '</h3><p class="price plat-price">' + esc(it.prix || "Prix à confirmer") + "</p></div></article>";
+    }).join("");
+  });
+
   each("[data-formules]", function (el) {
     el.innerHTML = (data.formules || []).map(function (f) {
       return '<div class="extra"><p class="label">' + esc(f.label) + "</p><h3>" + esc(f.titre) + "</h3>" +

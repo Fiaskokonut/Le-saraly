@@ -32,7 +32,7 @@
     "email": "lesaraly@gmail.com",
     "address": { "@type": "PostalAddress", "streetAddress": "157 cours de la République", "postalCode": "84700", "addressLocality": "Sorgues", "addressCountry": "FR" },
     "servesCuisine": ["Brunch", "Petit-déjeuner", "Café"],
-    "hasMenu": "https://lesaraly.fr/brunch.html",
+    "hasMenu": "https://lesaraly.fr/carte.html",
     "openingHoursSpecification": [
       { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "17:00" },
       { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "15:00" }
@@ -60,7 +60,7 @@
           <p class="lead">Brunch salé ou sucré, petits-déjeuners qui voyagent du Maghreb à Londres,
             cafés et goûters pour toute la famille. Au 157 cours de la République.</p>
           <div class="cta">
-            <a class="btn btn-light" href="brunch.html">Voir le brunch <span aria-hidden="true">→</span></a>
+            <a class="btn btn-light" href="#brunch">Voir le brunch <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="venir.html">Nous trouver</a>
           </div>
         </div>
@@ -73,14 +73,26 @@
       <div class="wrap band-grid" data-matin></div>
     </section>
 
-    <section class="section wrap" id="carte">
+    <section class="section wrap" id="brunch">
       <div class="section-head">
-        <h2 class="h2">Au menu</h2>
-        <p class="aside">Le brunch salé ou sucré, avec un café du coffee shop. Toute la carte, les boissons,
-          le goûter et le P’tit Saraly sont sur la page Le brunch.</p>
+        <div>
+          <p class="label section-kicker">Salé &amp; sucré</p>
+          <h2 class="h2">Le brunch</h2>
+        </div>
+        <p class="aside">Avec un café du coffee shop. Les boissons, les cafés et tous les prix sont sur la page La carte.</p>
       </div>
-      <div class="menu-grid" data-carte="accueil"></div>
-      <p class="more"><a class="btn btn-dark" href="brunch.html">Toute la carte <span aria-hidden="true">→</span></a></p>
+      <div class="plats" data-plats></div>
+      <p class="more"><a class="btn btn-dark" href="carte.html">Toute la carte <span aria-hidden="true">→</span></a></p>
+    </section>
+
+    <section class="aussi" aria-labelledby="aussi-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="h2" id="aussi-t">Et aussi</h2>
+          <p class="aside">Le goûter, le menu des enfants et les douceurs du comptoir.</p>
+        </div>
+        <div class="extras extras-home" data-formules></div>
+      </div>
     </section>
 
     <section class="why" id="saraly">

@@ -43,20 +43,21 @@ window.SARALY = {
     ]
   },
 
-  // La carte. "accueil: true" = affichée aussi sur la page d'accueil.
+  // La carte. "vedette: true" = catégorie présentée en grandes cartes illustrées sur l'accueil.
+  // "illus" = nom de l'illustration (chakchouka, benedictes, avocado, veloute, sucre).
   carte: [
     {
-      titre: "Le brunch", label: "Salé & sucré", accueil: true,
+      titre: "Le brunch", label: "Salé & sucré", vedette: true,
       items: [
-        { nom: "La chakchouka du Saraly", prix: "11,90 €", tag: "Salé" },
-        { nom: "Les bénédictes du Sud", prix: "12,90 €", tag: "Salé" },
-        { nom: "Avocado toast", prix: "14,90 €", tag: "Salé" },
-        { nom: "Le velouté du Saraly", prix: "12,90 €", tag: "Salé" },
-        { nom: "Le jardin d’Éden", prix: "10,90 €", tag: "Sucré" }
+        { nom: "La chakchouka du Saraly", prix: "11,90 €", tag: "Salé", illus: "brunch" },
+        { nom: "Les bénédictes du Sud", prix: "12,90 €", tag: "Salé", illus: "benedictes" },
+        { nom: "Avocado toast", prix: "14,90 €", tag: "Salé", illus: "avocado" },
+        { nom: "Le velouté du Saraly", prix: "12,90 €", tag: "Salé", illus: "veloute" },
+        { nom: "Le jardin d’Éden", prix: "10,90 €", tag: "Sucré", illus: "sucre" }
       ]
     },
     {
-      titre: "Les cafés", label: "Coffee shop", accueil: true,
+      titre: "Les cafés", label: "Coffee shop",
       items: [
         { nom: "Espresso", prix: null }, // prix non lisible sur leurs visuels
         { nom: "Café allongé", prix: null }, // prix non lisible sur leurs visuels
