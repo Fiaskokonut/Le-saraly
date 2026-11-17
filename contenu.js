@@ -8,43 +8,46 @@
    ========================================================= */
 window.SARALY = {
   // Horaires (format 24h "HH:MM"). null = fermé.
-  // ⚠️ À CONFIRMER avec Jérémy & Julien : valeurs provisoires.
+  // Source : bio Instagram "Mer-Sam 9/17h • Dim 9/15h".
   horaires: {
     lundi:    null,
-    mardi:    ["07:30", "18:30"],
-    mercredi: ["07:30", "18:30"],
-    jeudi:    ["07:30", "18:30"],
-    vendredi: ["07:30", "18:30"],
-    samedi:   ["08:00", "18:30"],
-    dimanche: ["08:30", "13:00"]
+    mardi:    null,
+    mercredi: ["09:00", "17:00"],
+    jeudi:    ["09:00", "17:00"],
+    vendredi: ["09:00", "17:00"],
+    samedi:   ["09:00", "17:00"],
+    dimanche: ["09:00", "15:00"]
   },
 
-  // Actus : la plus récente en premier. "image" est optionnel :
-  // déposer le fichier dans assets/visuels/ puis écrire son nom ici.
+  // Actus : la plus récente en premier.
+  // "image" est optionnel : déposer le visuel (carré, comme sur Instagram)
+  // dans assets/visuels/ puis écrire son chemin ici. Sans image, une affiche
+  // aux couleurs du Saraly est générée avec "affiche" (titre + phrase manuscrite).
+  // "date" est optionnelle (format "AAAA-MM-JJ").
   actus: [
     {
-      date: "2026-11-14",
-      type: "Nouveauté",
-      titre: "Le latte noisette est de retour",
-      texte: "Il revient avec le froid. Disponible en chaud, et en glacé pour les irréductibles.",
-      image: "assets/visuels/actu-latte.jpg",
-      visuel: "Latte noisette"
-    },
-    {
-      date: "2026-11-08",
-      type: "Au four",
-      titre: "Cookies du samedi",
-      texte: "Chocolat noir, fleur de sel. Sortis à 8h, rarement là après midi.",
-      image: "assets/visuels/actu-cookies.jpg",
-      visuel: "Cookies du samedi"
-    },
-    {
-      date: "2026-11-01",
-      type: "Infos",
-      titre: "Ouverts le 11 novembre",
-      texte: "Horaires du dimanche ce jour-là. On vous attend sous les voûtes.",
+      date: "",
+      type: "On recrute",
+      titre: "Chef(fe) de cuisine recherché(e)",
+      texte: "Passionné(e), organisé(e) et motivé(e) ? Rejoignez l’aventure brunch. Candidature : lesaraly@gmail.com",
       image: "",
-      visuel: "Ouvert le 11/11"
+      affiche: { kicker: "Le Saraly · Sorgues", titre: "Recrutement", script: "Chef(fe) de cuisine" }
+    },
+    {
+      date: "",
+      type: "Menu",
+      titre: "Le goûter dès 4,90 €",
+      texte: "Le petit goûter : une gourmandise et une petite boisson. Le goûter gourmand à 6,90 € : un pancake au choix.",
+      image: "",
+      affiche: { kicker: "Petites douceurs", titre: "Menu goûter", script: "pour de grands sourires" }
+    },
+    {
+      date: "",
+      type: "Enfants",
+      titre: "Le P’tit Saraly",
+      texte: "Jusqu’à 12 ans : œuf, bacon ou saumon, pain grillé, une petite douceur et une boisson.",
+      image: "",
+      affiche: { kicker: "Jusqu’à 12 ans", titre: "Le P’tit", script: "Saraly" }
     }
   ]
 };
