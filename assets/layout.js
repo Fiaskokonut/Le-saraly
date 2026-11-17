@@ -44,5 +44,13 @@
   document.body.insertAdjacentHTML("afterbegin", DEFS);
   var n = document.querySelector("[data-nav]"); if (n) n.outerHTML = NAV;
   var f = document.querySelector("[data-footer]"); if (f) f.outerHTML = FOOTER;
+  // Barre d'actions sur mobile : itinéraire, carte, et appel si le téléphone est renseigné
+  var tel = ((window.SARALY || {}).contact || {}).telephone || "";
+  var ACTIONS = '<nav class="action-bar" aria-label="Actions rapides">' +
+    '<a href="https://www.google.com/maps/search/?api=1&amp;query=Le+Saraly+157+cours+de+la+R%C3%A9publique+84700+Sorgues" target="_blank" rel="noopener">Itinéraire</a>' +
+    '<a class="primary" href="brunch.html">Le brunch</a>' +
+    (tel ? '<a href="tel:' + tel.replace(/\s/g, "") + '">Appeler</a>' : "") +
+    "</nav>";
+  document.body.insertAdjacentHTML("beforeend", ACTIONS);
   document.body.insertAdjacentHTML("beforeend", DEMO);
 })();

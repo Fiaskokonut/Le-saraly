@@ -1,0 +1,11 @@
+{
+  "name": "le-saraly",
+  "private": true,
+  "description": "Site vitrine Le Saraly — outils de vérification uniquement (le site n'a pas d'étape de build)",
+  "scripts": {
+    "verify": "node tests/verify.js"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.2"
+  }
+}

@@ -96,6 +96,20 @@
     }).join("");
   });
 
+  // ---- Téléphone et infos pratiques (affichés seulement si renseignés) ----
+  var contact = data.contact || {};
+  each("[data-telephone]", function (el) {
+    if (!contact.telephone) return;
+    el.innerHTML = 'Téléphone : <a href="tel:' + esc(contact.telephone.replace(/\s/g, "")) + '">' + esc(contact.telephone) + "</a>";
+    el.hidden = false;
+  });
+  var pratique = data.pratique || [];
+  each("[data-pratique]", function (el) {
+    if (!pratique.length) return;
+    el.innerHTML = pratique.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("");
+  });
+  each("[data-pratique-bloc]", function (el) { el.hidden = !pratique.length; });
+
   // ---- Menu mobile ----
   var toggle = document.querySelector(".nav-toggle"), links = document.getElementById("menu");
   if (toggle && links) {

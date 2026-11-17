@@ -7,6 +7,7 @@
    3. tous les liens internes répondent
    4. le contenu affiché correspond au référentiel tests/faits-verifies.json (prix, horaires, mots interdits)
    5. propriété : le badge « Ouvert / Fermé » est juste à toute heure de la semaine (336 instants testés)
+   6. accessibilité WCAG 2 A/AA (axe-core, si installé : npm install), barre mobile, blocs vides masqués, SEO
 */
 const http = require("http");
 const fs = require("fs");
@@ -180,6 +181,42 @@ async function openPage(browser, base, name, viewport) {
     }
     check(wrong.length === 0, "statut juste sur 336 instants", wrong.slice(0, 5).join(" ; "));
     await page.close();
+  }
+
+  // 6. Accessibilité, barre mobile, blocs vides, SEO
+  console.log("6. Accessibilité (WCAG 2 A/AA), barre mobile, blocs vides, SEO");
+  {
+    let AXE = null;
+    try { AXE = fs.readFileSync(require.resolve("axe-core/axe.min.js", { paths: [ROOT] }), "utf8"); }
+    catch (e) { console.log("  (axe-core absent : lancer « npm install » pour le test d'accessibilité)"); }
+    if (AXE) {
+      for (const name of PAGES) {
+        for (const vp of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
+          const { page } = await openPage(browser, base, name, vp);
+          await page.addScriptTag({ content: AXE });
+          const res = await page.evaluate(async () => await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa"] } }));
+          const v = res.violations.map((x) => `${x.id} (${x.nodes.length}) : ${x.nodes[0].target.join(" ")}`);
+          check(v.length === 0, `${name} @${vp.width} : aucune violation WCAG A/AA`, v.join(" | "));
+          await page.close();
+        }
+      }
+    }
+    const m = await openPage(browser, base, "index", { width: 390, height: 844 });
+    check(await m.page.locator(".action-bar").isVisible(), "mobile : barre d'actions visible");
+    const hrefs = await m.page.$$eval(".action-bar a", (as) => as.map((a) => a.getAttribute("href")));
+    check(hrefs.includes("brunch.html"), "mobile : barre d'actions → Le brunch");
+    const tel = await m.page.evaluate(() => ((window.SARALY || {}).contact || {}).telephone || "");
+    check(tel ? hrefs.some((h) => h.startsWith("tel:")) : !hrefs.some((h) => h.startsWith("tel:")), "mobile : bouton Appeler seulement si un téléphone est renseigné");
+    await m.page.close();
+    const d = await openPage(browser, base, "index", { width: 1280, height: 900 });
+    check(!(await d.page.locator(".action-bar").isVisible()), "ordinateur : barre d'actions masquée");
+    await d.page.close();
+    const v = await openPage(browser, base, "venir", { width: 1280, height: 900 });
+    const pr = await v.page.evaluate(() => ((window.SARALY || {}).pratique || []).length);
+    check(await v.page.locator("[data-pratique-bloc]").isVisible() === pr > 0, "venir : bloc « Sur place » visible seulement s'il est renseigné");
+    check(await v.page.locator("[data-telephone]").isVisible() === !!(await v.page.evaluate(() => ((window.SARALY || {}).contact || {}).telephone)), "venir : téléphone affiché seulement s'il est renseigné");
+    await v.page.close();
+    for (const f of ["robots.txt", "sitemap.xml"]) check((await fetch(`${base}/${f}`)).status === 200, `${f} présent`);
   }
 
   await browser.close();

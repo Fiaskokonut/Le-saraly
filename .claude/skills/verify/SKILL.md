@@ -5,7 +5,7 @@ description: Vérifier le site Le Saraly de bout en bout avant tout commit (page
 
 # Vérifier le site Le Saraly
 
-Lancer depuis la racine du dépôt :
+Lancer depuis la racine du dépôt (après `npm install` pour le test d'accessibilité) :
 
 ```bash
 node tests/verify.js
@@ -17,7 +17,8 @@ Le script sert le dossier en local et ouvre chaque page dans Chromium (Playwrigh
 2. le parcours : menu → chaque page, lien actif, menu mobile, retour par le logo, sélecteur de palette ;
 3. tous les liens internes répondent ;
 4. le contenu affiché correspond à `tests/faits-verifies.json` : prix, horaires, adresse, e-mail, mots interdits (formulations non vérifiées) ;
-5. le badge « Ouvert / Fermé » est juste sur une semaine complète (336 instants).
+5. le badge « Ouvert / Fermé » est juste sur une semaine complète (336 instants) ;
+6. accessibilité WCAG 2 A/AA (axe-core, après `npm install`), barre d'actions mobile, blocs vides masqués, robots.txt et sitemap.xml.
 
 ## Règles
 

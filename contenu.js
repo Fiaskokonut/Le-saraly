@@ -20,6 +20,19 @@ window.SARALY = {
     dimanche: ["09:00", "15:00"]
   },
 
+  // Contact. Le téléphone n'est pas encore connu : laisser "" tant qu'il n'est pas
+  // confirmé. Une fois rempli, il s'affiche sur la page Venir et dans la barre mobile.
+  contact: {
+    telephone: "",            // ex. "04 90 00 00 00"
+    email: "lesaraly@gmail.com"
+  },
+
+  // Infos pratiques affichées sur la page Venir, seulement si la liste n'est pas vide.
+  // N'y mettre que ce que le client a confirmé. Exemples : "Terrasse",
+  // "Accès personnes à mobilité réduite", "Titres-restaurant acceptés",
+  // "Vente à emporter", "Animaux bienvenus", "Wi-Fi".
+  pratique: [],
+
   // Formules du matin (menu Facebook "de 9h à 10h30")
   matin: {
     horaire: "de 9h à 10h30",

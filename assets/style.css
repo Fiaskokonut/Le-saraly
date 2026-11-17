@@ -6,19 +6,20 @@
    ========================================================= */
 :root {
   /* Palette "Façade" (par défaut) */
-  --hero-1: #D0603D;        /* enduit terracotta de la façade */
-  --hero-2: #B84C2E;
+  --hero-1: #B5492B;        /* enduit terracotta de la façade (assombri pour un contraste AA du texte crème) */
+  --hero-2: #A2402A;
   --hero-ink: #FBEFE3;      /* lettres crème de l'enseigne */
   --hero-accent: #F7D27A;   /* soleil */
-  --dapple: rgba(255, 196, 150, .55);  /* lumière à travers les platanes */
+  --dapple: rgba(255, 196, 150, .4);   /* lumière à travers les platanes */
   --band: #F7D27A;
   --band-ink: #3E2A21;
   --paper: #FCF4EC;         /* fond crème du badge */
   --paper-2: #F6E7DA;
   --rose: #F1DAD6;          /* rose poudré (logo secondaire) */
-  --rust: #B4613E;          /* rouille du logo */
+  --rust: #B4613E;          /* rouille du logo (filets, grands titres) */
+  --rust-text: #96492A;     /* rouille foncée pour les petits textes (contraste AA) */
   --ink: #3E2A21;           /* brun foncé */
-  --muted: #7B6155;
+  --muted: #6E564A;
   --line: rgba(62, 42, 33, .2);
   --card: #FFFBF7;
 
@@ -33,15 +34,15 @@
 }
 [data-theme="rose"] {
   --hero-1: #F1DAD6; --hero-2: #E9C9C3; --hero-ink: #4A3027; --hero-accent: #B4613E;
-  --dapple: rgba(255, 255, 255, .5); --band: #B4613E; --band-ink: #FCF4EC;
+  --dapple: rgba(255, 255, 255, .5); --band: #96492A; --band-ink: #FCF4EC;
 }
 [data-theme="soleil"] {
   --hero-1: #F7D27A; --hero-2: #EFC05A; --hero-ink: #5B3B12; --hero-accent: #C2552F;
-  --dapple: rgba(255, 245, 210, .6); --band: #C2552F; --band-ink: #FCF4EC;
+  --dapple: rgba(255, 245, 210, .6); --band: #A2402A; --band-ink: #FCF4EC;
 }
 [data-theme="creme"] {
-  --hero-1: #FCF1E7; --hero-2: #F5E2D2; --hero-ink: #B4613E; --hero-accent: #D0603D;
-  --dapple: rgba(230, 170, 130, .25); --band: #B4613E; --band-ink: #FCF4EC;
+  --hero-1: #FCF1E7; --hero-2: #F5E2D2; --hero-ink: #96492A; --hero-accent: #B5492B;
+  --dapple: rgba(230, 170, 130, .25); --band: #96492A; --band-ink: #FCF4EC;
 }
 
 * { box-sizing: border-box; }
@@ -131,7 +132,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .hero-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-top: 64px; padding-top: 36px; border-top: 1px solid color-mix(in srgb, var(--hero-ink) 30%, transparent); }
 .hero-claim { display: grid; gap: 18px; justify-items: start; }
 .brunch-pill { margin: 0; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 7px; border-radius: 999px;
-  background: var(--hero-accent); color: var(--hero-2); font: 700 13px var(--f-display); letter-spacing: .16em; text-transform: uppercase; }
+  background: var(--band); color: var(--band-ink); font: 700 13px var(--f-display); letter-spacing: .16em; text-transform: uppercase; }
 .dot-sun { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 25%, transparent); }
 .tagline { margin: 0; font: 700 clamp(34px, 4.4vw, 54px)/1.02 var(--f-display); text-transform: uppercase; }
 .tagline em { font: 400 1.5em/.9 var(--f-script); text-transform: none; color: var(--hero-accent); letter-spacing: 0; }
@@ -169,17 +170,17 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .name { min-width: 0; }
 .leader { flex: 1; border-bottom: 1.5px dotted var(--line); transform: translateY(-5px); min-width: 20px; }
 .items p { margin: 3px 0 0; color: var(--muted); font-size: 15px; }
-.tag { font: 600 10px var(--f-display); letter-spacing: .14em; text-transform: uppercase; background: var(--rust); color: var(--paper); padding: 4px 7px 2px; border-radius: 3px; margin-left: 6px; vertical-align: 2px; }
+.tag { font: 600 10px var(--f-display); letter-spacing: .14em; text-transform: uppercase; background: var(--rust-text); color: var(--paper); padding: 4px 7px 2px; border-radius: 3px; margin-left: 6px; vertical-align: 2px; }
 .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 80px; }
 .extra { background: var(--card); border: 1px solid var(--line); border-radius: 160px 160px 10px 10px; padding: 56px 28px 30px; text-align: center; }
-.extra .label { color: var(--rust); font-size: 11px; }
+.extra .label { color: var(--rust-text); font-size: 11px; }
 .extra h3 { font: 400 34px/1.1 var(--f-script); margin: 8px 0 6px; }
 .extra .items { text-align: left; }
 .extra-txt { color: var(--muted); font-size: 15.5px; margin: 14px 0 0; }
 
 /* ---------- Le Saraly : 4 points illustrés ---------- */
 .why { background: var(--rose); padding: 112px 0; }
-.why .label { color: var(--rust); }
+.why .label { color: var(--rust-text); }
 .why .section-head .h2 { margin-top: 14px; font-size: clamp(36px, 4.2vw, 52px); }
 .points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 .point { min-width: 0; }
@@ -187,7 +188,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .point p { margin: 0; color: var(--muted); font-size: 15.5px; }
 .arch-il { border-radius: 999px 999px 10px 10px; overflow: hidden; aspect-ratio: 3 / 4; max-width: 100%; box-shadow: 0 18px 40px -22px rgba(62, 42, 33, .45); }
 .arch-il svg { display: block; width: 100%; height: 100%; }
-.text-link { white-space: nowrap; color: var(--rust); font: 700 14px var(--f-display); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 3px; }
+.text-link { white-space: nowrap; color: var(--rust-text); font: 700 14px var(--f-display); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 3px; }
 .text-link:hover { color: var(--ink); }
 .more { margin: 56px 0 0; }
 
@@ -215,7 +216,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .story:nth-child(even) { grid-template-columns: 1fr minmax(0, 380px); }
 .story:nth-child(even) .arch-il { order: 2; }
 .story-text { min-width: 0; }
-.story-text .label { color: var(--rust); }
+.story-text .label { color: var(--rust-text); }
 .story-text .h2 { margin: 14px 0 20px; font-size: clamp(34px, 4vw, 50px); }
 .story-text p:not(.label) { color: var(--muted); max-width: 34em; margin: 0 0 26px; font-size: 17.5px; }
 .follow { text-align: center; display: grid; justify-items: center; gap: 16px; }
@@ -232,7 +233,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .actu-visual img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .ph { /* visuel façon affiche Saraly, en attendant les visuels IA */
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-  padding: 28px; text-align: center; color: var(--rust);
+  padding: 28px; text-align: center; color: var(--rust-text);
   background: radial-gradient(70% 60% at 50% 45%, var(--card), var(--paper-2));
 }
 .ph::before { content: ""; position: absolute; inset: 14px; border: 1.5px solid color-mix(in srgb, var(--rust) 45%, transparent); border-radius: 999px 999px 6px 6px; }
@@ -240,7 +241,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .ph-title { font: 700 clamp(30px, 3.2vw, 40px)/.95 var(--f-display); text-transform: uppercase; color: var(--hero-2); }
 .ph-script { font: 400 24px/1.1 var(--f-script); color: var(--ink); }
 .actu-body { padding: 20px 22px 24px; }
-.actu-meta { color: var(--rust); font-size: 10.5px; margin-bottom: 8px; }
+.actu-meta { color: var(--rust-text); font-size: 10.5px; margin-bottom: 8px; }
 .actu h3 { font: 700 19px/1.2 var(--f-display); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
 .actu p { margin: 0; color: var(--muted); font-size: 15px; }
 .socials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
@@ -249,7 +250,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .venir { background: var(--paper-2); padding: 112px 0; }
 .venir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: stretch; }
 .venir-grid > * { min-width: 0; }
-.venir .label { color: var(--rust); margin-bottom: 14px; }
+.venir .label { color: var(--rust-text); margin-bottom: 14px; }
 .venir .h2 { font-size: clamp(34px, 4vw, 50px); }
 .addr { color: var(--muted); margin: 14px 0 26px; }
 .email { color: var(--ink); font-weight: 600; user-select: all; }
@@ -257,7 +258,7 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .hours th, .hours td { text-align: left; padding: 10px 0; border-bottom: 1px dotted var(--line); font-weight: 500; }
 .hours td { text-align: right; font-variant-numeric: tabular-nums; }
 .hours tr.closed-day { color: var(--muted); }
-.hours tr.today th, .hours tr.today td { font-weight: 700; color: var(--rust); }
+.hours tr.today th, .hours tr.today td { font-weight: 700; color: var(--rust-text); }
 .map { border-radius: 10px; overflow: hidden; min-height: 380px; background: var(--rose); }
 .map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: sepia(.25) saturate(.8); }
 
@@ -323,3 +324,22 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
   .demo-theme { left: 50%; transform: translateX(-50%); bottom: 12px; }
   .footer-grid { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---------- Barre d'actions mobile (Itinéraire / Le brunch / Appeler) ---------- */
+.action-bar { display: none; }
+@media (max-width: 760px) {
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .action-bar {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: var(--ink); padding: 8px max(8px, env(safe-area-inset-left, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-right, 0px)); gap: 8px;
+    box-shadow: 0 -6px 20px rgba(0,0,0,.18);
+  }
+  .action-bar a { display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: var(--radius);
+    color: var(--paper); text-decoration: none; font: 700 13px var(--f-display); letter-spacing: .12em; text-transform: uppercase; }
+  .action-bar a.primary { background: var(--hero-1); }
+  .demo-theme { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ---------- Infos pratiques (affichées seulement si renseignées dans contenu.js) ---------- */
+.pratique { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.pratique li { border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px 5px; font: 600 13px var(--f-display); letter-spacing: .06em; }

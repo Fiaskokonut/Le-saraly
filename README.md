@@ -11,12 +11,14 @@ actus.html             toutes les actus
 venir.html             horaires, adresse, contact, plan
 liens.html             page « lien en bio » pour Instagram (remplace Linktree)
 mentions-legales.html  obligatoire en France (champs jaunes à compléter)
-contenu.js             horaires, carte, formules, actus : le seul fichier à modifier au quotidien
+contenu.js             horaires, carte, formules, actus, contact, infos pratiques : le seul fichier à modifier au quotidien
 assets/layout.js       éléments communs : logo, illustrations, menu, pied de page
 assets/app.js          affiche le contenu, statut ouvert/fermé, menu mobile
 assets/style.css       styles (les couleurs de la DA sont en haut du fichier)
 assets/img/            favicon et og.png (aperçu lors d'un partage de lien)
 assets/visuels/        visuels des actus (carrés, comme sur Instagram)
+robots.txt, sitemap.xml référencement
+tests/                 vérification de bout en bout (voir plus bas)
 ```
 
 La carte, les horaires et les actus sont saisis une seule fois dans `contenu.js` et s'affichent sur toutes les pages.
@@ -24,7 +26,7 @@ La carte, les horaires et les actus sont saisis une seule fois dans `contenu.js`
 ## Direction artistique (relevée sur leurs réseaux)
 
 - **Logo** : reconstitué en SVG dans `assets/layout.js` (`#g-le`, `#g-saraly`, badge `#logo-badge`). Il reprend le S en blocs, les A pointés, le E à losange, le R anguleux, le soleil et le Y à point. **Demander le fichier officiel** (SVG ou PNG HD) pour vérifier ou remplacer.
-- **Couleurs** : terracotta de la façade, rouille du logo sur crème, rose poudré, jaune soleil. Le sélecteur de démo propose 4 palettes : Façade, Rose poudré, Soleil, Crème.
+- **Couleurs** : terracotta de la façade, rouille du logo sur crème, rose poudré, jaune soleil. La terracotta du haut de page est légèrement assombrie (#B5492B) et les petits textes rouille utilisent une rouille foncée (#96492A), pour respecter le contraste WCAG AA. Le sélecteur de démo propose 4 palettes : Façade, Rose poudré, Soleil, Crème.
 - **Typos** : Josefin Sans (géométrique, proche du logo), Kaushan Script (rappelle les menus manuscrits), Instrument Sans (texte courant).
 - **Illustrations** : 4 dessins vectoriels (chakchouka, latte, baghrir et amlou, pancakes) dans `assets/layout.js`.
 - **Positionnement** : le brunch (visible dès le haut de page), le coffee shop de Sorgues, un petit-déj qui voyage (msemen, baghrir, Frenchy, English), le goûter et les familles.
@@ -39,7 +41,9 @@ Tout le texte vient de leur bio Instagram, de leur page Facebook et des menus qu
 - [ ] **« Salon de thé »** : retiré des textes en attendant confirmation (il figure dans le badge du logo officiel).
 - [ ] **« Brunch & coffee shop, enfin à Sorgues »** : repose sur l'information qu'il n'y a pas d'autre coffee shop à Sorgues. À confirmer avec le client.
 - [ ] **Recrutement chef(fe) de cuisine** : retirer l'actu si le poste est pourvu.
-- [ ] **Mentions légales** : forme juridique, gérant, hébergeur, SIREN (relevé sur un annuaire).
+- [ ] **Téléphone** (`contact.telephone` dans `contenu.js`) : une fois renseigné, il s'affiche sur la page Venir et ajoute un bouton « Appeler » sur mobile.
+- [ ] **Infos pratiques** (`pratique` dans `contenu.js`) : terrasse, accessibilité, titres-restaurant, à emporter… seulement ce qui est confirmé. La liste vide n'affiche rien.
+- [ ] **Mentions légales** : forme juridique, gérant, hébergeur, SIREN. Le SIREN vient d'un annuaire qui mélangeait Le Saraly et un autre restaurant (la « bâtisse de 1859 voûtée » était celle de Ju'ste Chez Moi) : à vérifier en priorité.
 - [ ] **Sélecteur de palette** : retirer le bloc `DEMO` dans `assets/layout.js` une fois la palette choisie.
 
 ## Visuels IA : garder un rendu propre
@@ -69,6 +73,18 @@ Tout le texte vient de leur bio Instagram, de leur page Facebook et des menus qu
 Le domaine `lesaraly.fr` était **libre au 17/11/2026** (vérification sur le registre AFNIC). Les tarifs sont à reconfirmer au moment de la commande.
 
 Tous les comptes (OVHcloud, GitHub, Cloudflare ou Netlify) sont créés **au nom du client**. Chaque modification poussée sur GitHub met le site à jour automatiquement. Une modification peut aussi se faire depuis l'interface web de GitHub, avec le crayon sur `contenu.js`.
+
+## Vérifier avant chaque mise en ligne
+
+```bash
+npm install
+```
+
+```bash
+npm run verify
+```
+
+Le script ouvre chaque page dans Chromium (Playwright requis) et lance 141 vérifications : erreurs, liens, contenu comparé à `tests/faits-verifies.json`, badge ouvert/fermé, accessibilité WCAG A/AA, barre mobile. Détails dans `.claude/skills/verify/SKILL.md`.
 
 ## Aperçu en local
 
