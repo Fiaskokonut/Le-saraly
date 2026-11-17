@@ -14,14 +14,21 @@ assets/img/            favicon et og.png (aperçu lors d'un partage de lien)
 assets/visuels/        visuels du lieu et des actus (photos ou visuels IA)
 ```
 
+## Direction artistique (relevée sur leurs réseaux)
+
+- **Logo** : reconstitué en SVG dans `index.html` (`#g-le`, `#g-saraly`, badge `#logo-badge`). Il reprend le S en blocs, les A pointés, le R anguleux, le soleil et le Y à point. **Demander le fichier officiel** (SVG ou PNG HD) pour vérifier ou remplacer.
+- **Couleurs** : terracotta de la façade, rouille du logo sur crème, rose poudré, jaune soleil. Le sélecteur de démo propose 4 palettes : Façade, Rose poudré, Soleil, Crème.
+- **Typos** : Josefin Sans (géométrique, proche du logo), Kaushan Script (rappelle les menus manuscrits), Instrument Sans (texte courant).
+- **Positionnement** : le coffee shop de Sorgues, le brunch du mercredi au dimanche, un petit-déj qui voyage (msemen, baghrir, Frenchy, English), le goûter et les familles.
+
 ## À valider avec le client avant la mise en ligne
 
-- [ ] **Couleurs** : caler les variables `:root` de `assets/style.css` sur leur DA Instagram et Facebook (logo, teintes des visuels IA).
-- [ ] **Horaires** : dans `contenu.js`, les valeurs actuelles sont provisoires.
-- [ ] **Carte et prix** dans `index.html` : les prix actuels sont indicatifs.
-- [ ] **Visuels** : déposer dans `assets/visuels/` les fichiers `hero.jpg`, `lieu-1.jpg`, `lieu-2.jpg`, `lieu-3.jpg` et `actu-*.jpg`. Tant qu'un fichier manque, une illustration de remplacement s'affiche.
-- [ ] **Mentions légales** : forme juridique, gérant, contact, hébergeur.
-- [ ] **Sélecteur de palette** : il ne sert qu'à la démo. Retirer le bloc `.demo-theme` dans `index.html`.
+- [ ] **Prix et intitulés** de la carte : relevés sur des visuels Facebook en basse résolution. Les cafés et les boissons sont estimés.
+- [ ] **Horaires** dans `contenu.js` (source : bio Instagram, Mer–Sam 9h–17h, Dim 9h–15h).
+- [ ] **Photos** : celles de `assets/visuels/` sont des recadrages de captures d'écran, donc floues. Les remplacer par les originaux HD (façade, brunch).
+- [ ] **Accroche « Enfin un coffee shop à Sorgues »** : si le client confirme qu'il est le seul, on peut écrire « Le seul coffee shop de Sorgues ».
+- [ ] **Mentions légales** : forme juridique, gérant, hébergeur.
+- [ ] **Sélecteur de palette** : retirer le bloc `.demo-theme` de `index.html` une fois la palette choisie.
 
 ## Visuels IA : garder un rendu propre
 
