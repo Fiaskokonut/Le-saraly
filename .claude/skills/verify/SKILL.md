@@ -5,7 +5,7 @@ description: Vérifier le site Le Saraly de bout en bout avant tout commit (page
 
 # Vérifier le site Le Saraly
 
-Lancer depuis la racine du dépôt (après `npm install` pour le test d'accessibilité) :
+Lancer depuis la racine du dépôt (après `npm install` pour le test d'accessibilité). Le script génère d'abord le site avec `node build.js`, puis teste le résultat :
 
 ```bash
 node tests/verify.js

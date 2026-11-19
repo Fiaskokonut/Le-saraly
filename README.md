@@ -1,7 +1,7 @@
 # Le Saraly — site vitrine
 
 Site vitrine du **Saraly**, brunch et coffee shop au 157 cours de la République, 84700 Sorgues.
-Site statique en HTML, CSS et JS. Il n'y a ni CMS, ni base de données, ni étape de build : il suffit d'ouvrir `index.html`.
+Site statique en HTML, CSS et JS, sans CMS ni base de données. `node build.js` génère le dossier `dist/` : les pages avec le contenu de `contenu.js` déjà écrit dedans (lisibles sans JavaScript, meilleures pour Google). Ouvrir `index.html` directement marche aussi : le JavaScript affiche alors le contenu.
 
 ```
 index.html             accueil centré sur le brunch : formules du matin, plats en cartes illustrées, goûter, actus, accès
@@ -12,8 +12,10 @@ venir.html             horaires, adresse, contact, plan
 liens.html             page « lien en bio » pour Instagram (remplace Linktree)
 mentions-legales.html  obligatoire en France (champs jaunes à compléter)
 contenu.js             horaires, carte, formules, actus, contact, infos pratiques : le seul fichier à modifier au quotidien
-assets/layout.js       éléments communs : logo, illustrations, menu, pied de page
-assets/app.js          affiche le contenu, statut ouvert/fermé, menu mobile
+build.js               génère dist/ (lancé par l'hébergeur à chaque mise à jour)
+assets/render.js       affichage partagé navigateur / build : logo, illustrations, menu, pied de page, carte
+assets/app.js          statut ouvert/fermé, fermetures, carte Google au clic, menu mobile
+assets/fonts/          polices hébergées sur le site (licence SIL OFL)
 assets/style.css       styles (les couleurs de la DA sont en haut du fichier)
 assets/img/            favicon et og.png (aperçu lors d'un partage de lien)
 assets/visuels/        visuels des actus (carrés, comme sur Instagram)
@@ -25,10 +27,10 @@ La carte, les horaires et les actus sont saisis une seule fois dans `contenu.js`
 
 ## Direction artistique (relevée sur leurs réseaux)
 
-- **Logo** : reconstitué en SVG dans `assets/layout.js` (`#g-le`, `#g-saraly`, badge `#logo-badge`). Il reprend le S en blocs, les A pointés, le E à losange, le R anguleux, le soleil et le Y à point. **Demander le fichier officiel** (SVG ou PNG HD) pour vérifier ou remplacer.
+- **Logo** : reconstitué en SVG dans `assets/render.js` (`#g-le`, `#g-saraly`, badge `#logo-badge`). Il reprend le S en blocs, les A pointés, le E à losange, le R anguleux, le soleil et le Y à point. **Demander le fichier officiel** (SVG ou PNG HD) pour vérifier ou remplacer.
 - **Couleurs** : terracotta de la façade, rouille du logo sur crème, rose poudré, jaune soleil. La terracotta du haut de page est légèrement assombrie (#B5492B) et les petits textes rouille utilisent une rouille foncée (#96492A), pour respecter le contraste WCAG AA. Le sélecteur de démo propose 4 palettes : Façade, Rose poudré, Soleil, Crème.
 - **Typos** : Josefin Sans (géométrique, proche du logo), Kaushan Script (rappelle les menus manuscrits), Instrument Sans (texte courant).
-- **Illustrations** : 8 dessins vectoriels dans `assets/layout.js` (chakchouka, bénédictes, avocado toast, velouté, latte, baghrir et amlou, pancakes, et un motif soleil pour « Le jardin d'Éden », dont la composition n'est pas connue). À remplacer par leurs photos HD dès qu'ils les fournissent.
+- **Illustrations** : 8 dessins vectoriels dans `assets/render.js` (chakchouka, bénédictes, avocado toast, velouté, latte, baghrir et amlou, pancakes, et un motif soleil pour « Le jardin d'Éden », dont la composition n'est pas connue). À remplacer par leurs photos HD dès qu'ils les fournissent.
 - **Positionnement** : le brunch (visible dès le haut de page), le coffee shop de Sorgues, un petit-déj qui voyage (msemen, baghrir, Frenchy, English), le goûter et les familles.
 
 ## Sources du contenu et points à valider
@@ -44,7 +46,7 @@ Tout le texte vient de leur bio Instagram, de leur page Facebook et des menus qu
 - [ ] **Téléphone** (`contact.telephone` dans `contenu.js`) : une fois renseigné, il s'affiche sur la page Venir et ajoute un bouton « Appeler » sur mobile.
 - [ ] **Infos pratiques** (`pratique` dans `contenu.js`) : terrasse, accessibilité, titres-restaurant, à emporter… seulement ce qui est confirmé. La liste vide n'affiche rien.
 - [ ] **Mentions légales** : forme juridique, gérant, hébergeur, SIREN. Le SIREN vient d'un annuaire qui mélangeait Le Saraly et un autre restaurant (la « bâtisse de 1859 voûtée » était celle de Ju'ste Chez Moi) : à vérifier en priorité.
-- [ ] **Sélecteur de palette** : retirer le bloc `DEMO` dans `assets/layout.js` une fois la palette choisie.
+- [ ] **Sélecteur de palette** : retirer le bloc « Palette de démo » dans `assets/app.js` une fois la palette choisie.
 
 ## Visuels IA : garder un rendu propre
 
@@ -66,7 +68,7 @@ Tout le texte vient de leur bio Instagram, de leur page Facebook et des menus qu
 | Poste | Solution | Coût indicatif |
 |---|---|---|
 | Nom de domaine `lesaraly.fr` | OVHcloud, au nom du gérant | ≈ 6 € TTC la 1re année, puis ≈ 9,35 € TTC par an |
-| Hébergement | Cloudflare Pages ou Netlify, offre gratuite, relié à ce dépôt GitHub | 0 € |
+| Hébergement | Cloudflare Pages ou Netlify, offre gratuite, relié à ce dépôt GitHub (commande de build : `node build.js`, dossier publié : `dist` ; `netlify.toml` fourni) | 0 € |
 | HTTPS | Automatique | 0 € |
 | E-mail pro (optionnel) | Offre e-mail OVHcloud ou Zimbra | quelques € par mois |
 
